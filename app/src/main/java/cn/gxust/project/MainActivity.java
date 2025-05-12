@@ -13,9 +13,9 @@ import cn.gxust.project.Fragment.UserFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    private HomeFragment homefragment;
-    private OrderFragment orderfragment;
-    private UserFragment userfragment;
+    private HomeFragment homeFragment;
+    private OrderFragment orderFragment;
+    private UserFragment userFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,27 +23,27 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        homefragment = new HomeFragment();
-        orderfragment = new OrderFragment();
-        userfragment = new UserFragment();
+        homeFragment = new HomeFragment();
+        orderFragment = new OrderFragment();
+        userFragment = new UserFragment();
 
         // 设置默认页面
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.topLayout, homefragment)
+                    .replace(R.id.mainBlankLayout, homeFragment)
                     .commit();
         }
     }
 
-    public void switch_page(View view) {
+    public void switch_mainpage(View view) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
         if (view.getId() == R.id.home) {
-            fragmentTransaction.replace(R.id.topLayout, homefragment);
+            fragmentTransaction.replace(R.id.mainBlankLayout, homeFragment);
         } else if (view.getId() == R.id.order) {
-            fragmentTransaction.replace(R.id.topLayout, orderfragment);
+            fragmentTransaction.replace(R.id.mainBlankLayout, orderFragment);
         } else if (view.getId() == R.id.user) {
-            fragmentTransaction.replace(R.id.topLayout, userfragment);
+            fragmentTransaction.replace(R.id.mainBlankLayout, userFragment);
         }
 
         fragmentTransaction.commit();

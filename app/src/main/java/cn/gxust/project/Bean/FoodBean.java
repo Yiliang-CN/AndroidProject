@@ -8,6 +8,15 @@ public class FoodBean {
     private String foodPrice;   // 菜品价格
     private String foodImage;   // 菜品图片
 
+    public FoodBean(int foodID, String foodName, String foodType, String foodSales, String foodPrice, String foodImage) {
+        this.foodID = foodID;
+        this.foodName = foodName;
+        this.foodType = foodType;
+        this.foodSales = foodSales;
+        this.foodPrice = foodPrice;
+        this.foodImage = foodImage;
+    }
+
     public int getFoodID() {
         return foodID;
     }

@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <FrameLayout
-        android:id="@+id/topLayout"
+        android:id="@+id/mainBlankLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottomLayout"
+        android:layout_above="@+id/navLayout"
         android:orientation="horizontal" />
 
     <LinearLayout
-        android:id="@+id/bottomLayout"
+        android:id="@+id/navLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:weightSum="3">
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/home"
@@ -28,9 +26,7 @@
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:background="@color/white"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="switch_page"
+            android:onClick="switch_mainpage"
             android:padding="5dp"
             android:src="@drawable/home" />
 
@@ -41,9 +37,7 @@
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:background="@color/white"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="switch_page"
+            android:onClick="switch_mainpage"
             android:padding="5dp"
             android:src="@drawable/order" />
 
@@ -54,9 +48,7 @@
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:background="@color/white"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="switch_page"
+            android:onClick="switch_mainpage"
             android:padding="5dp"
             android:src="@drawable/user" />
 

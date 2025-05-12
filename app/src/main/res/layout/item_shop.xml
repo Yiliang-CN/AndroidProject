@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:padding="10dp">
+
+    <!--图片 名称 销量 价格-->
+
+    <ImageView
+        android:id="@+id/shopImage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/shop" />
+
+    <TextView
+        android:id="@+id/shopName"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_toEndOf="@+id/shopImage"
+        android:gravity="center_vertical"
+        android:text="店名"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/shopSales"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_below="@+id/shopName"
+        android:layout_toEndOf="@+id/shopImage"
+        android:gravity="center_vertical"
+        android:text="销量"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/shopPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_below="@+id/shopSales"
+        android:layout_toEndOf="@+id/shopImage"
+        android:gravity="center_vertical"
+        android:text="价格"
+        android:textSize="16sp" />
+
+</RelativeLayout>

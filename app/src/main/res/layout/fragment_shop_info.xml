@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".Fragment.ShopInfoFragment">
+
+    <TextView
+        android:id="@+id/shopInfoNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center_vertical"
+        android:text="店名"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/shopInfoName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_toEndOf="@+id/shopInfoNameText"
+        android:gravity="center_vertical"
+        android:text="店名"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/shopInfoPhoneText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/shopInfoNameText"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center_vertical"
+        android:text="电话"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/shopInfoPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/shopInfoNameText"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_toEndOf="@+id/shopInfoPhoneText"
+        android:gravity="center_vertical"
+        android:text="电话"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/shopInfoAddrText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/shopInfoPhoneText"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center_vertical"
+        android:text="地址"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/shopInfoAddr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/shopInfoPhoneText"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_toEndOf="@id/shopInfoAddrText"
+        android:gravity="center_vertical"
+        android:text="地址"
+        android:textSize="24sp" />
+
+</RelativeLayout>
