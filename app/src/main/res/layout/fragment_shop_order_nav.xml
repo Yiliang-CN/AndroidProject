@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragment.Home.ShopCmtFragment">
+    tools:context=".Fragment.Home.ShopOrderNavFragment">
 
     <ListView
-        android:id="@+id/cmtListView"
+        android:id="@+id/foodNavListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

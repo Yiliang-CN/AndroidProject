@@ -3,23 +3,17 @@ package cn.gxust.project.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentTransaction;
 
 import cn.gxust.project.Bean.ShopBean;
-import cn.gxust.project.Fragment.ShopCmtFragment;
-import cn.gxust.project.Fragment.ShopInfoFragment;
-import cn.gxust.project.Fragment.ShopOrderFragment;
-import cn.gxust.project.MainActivity;
+import cn.gxust.project.Fragment.Home.ShopCmtFragment;
+import cn.gxust.project.Fragment.Home.ShopInfoFragment;
+import cn.gxust.project.Fragment.Home.ShopOrderFragment;
 import cn.gxust.project.R;
 
 public class ShopActivity extends AppCompatActivity {
@@ -68,6 +62,7 @@ public class ShopActivity extends AppCompatActivity {
 
     public void switch_shoppage(View view) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
         Bundle bundle = new Bundle();
         bundle.putSerializable("shopBean", shopBean);
 

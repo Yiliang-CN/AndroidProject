@@ -23,7 +23,6 @@ public class HomeFragment extends Fragment {
     private List<ShopBean> shopBeanList;
     private ShopAdapter shopAdapter;
 
-
     // 模拟数据
     int[] shopId = {1, 2, 3, 4, 5, 6, 7, 8};
     String[] shopName = {"商店一号店铺", "商店二号店铺", "商店三号店铺", "商店四号店铺", "商店五号店铺", "商店六号店铺", "商店七号店铺", "商店八号店铺"};
@@ -45,8 +44,6 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         shopBeanList = new ArrayList<>();
-        shopAdapter = new ShopAdapter(shopBeanList, getContext());
-
         for (int i = 0; i < shopId.length; i++) {
             ShopBean shopBean = new ShopBean(shopId[i], shopName[i], shopSales[i], shopPrice[i], shopPhone[i], shopAddr[i], "http://img.zcool.cn/community/013f5e594b0f0fa801206b0e0f0c7a2.jpg@1280w_1l_2o_100sh.jpg");
             shopBeanList.add(shopBean);

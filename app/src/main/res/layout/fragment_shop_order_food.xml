@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragment.Home.ShopCmtFragment">
+    tools:context=".Fragment.Home.ShopOrderFoodFragment">
 
     <ListView
-        android:id="@+id/cmtListView"
+        android:id="@+id/foodListView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

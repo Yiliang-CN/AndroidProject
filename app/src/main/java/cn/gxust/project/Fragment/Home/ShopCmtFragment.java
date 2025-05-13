@@ -1,4 +1,4 @@
-package cn.gxust.project.Fragment;
+package cn.gxust.project.Fragment.Home;
 
 import android.os.Bundle;
 

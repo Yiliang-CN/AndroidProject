@@ -1,6 +1,5 @@
-package cn.gxust.project.Fragment;
+package cn.gxust.project.Fragment.Home;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
