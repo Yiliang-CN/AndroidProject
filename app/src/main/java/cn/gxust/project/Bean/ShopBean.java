@@ -3,7 +3,7 @@ package cn.gxust.project.Bean;
 import java.io.Serializable;
 
 public class ShopBean implements Serializable {
-    private int shopId;             // 商店id
+    private int shopID;             // 商店id
     private String shopName;        // 商店名称
     private String shopSales;       // 商店销量
     private String shopPrice;       // 商店价格
@@ -12,7 +12,7 @@ public class ShopBean implements Serializable {
     private String shopImg;         // 商店图片
 
     public ShopBean(int shopId, String shopName, String shopSales, String shopPrice, String shopPhone, String shopAddress, String shopImg) {
-        this.shopId = shopId;
+        this.shopID = shopId;
         this.shopName = shopName;
         this.shopSales = shopSales;
         this.shopPrice = shopPrice;
@@ -21,12 +21,12 @@ public class ShopBean implements Serializable {
         this.shopImg = shopImg;
     }
 
-    public int getShopId() {
-        return shopId;
+    public int getShopID() {
+        return shopID;
     }
 
-    public void setShopId(int shopId) {
-        this.shopId = shopId;
+    public void setShopID(int shopID) {
+        this.shopID = shopID;
     }
 
     public String getShopName() {

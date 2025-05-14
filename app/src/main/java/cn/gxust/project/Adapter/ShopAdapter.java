@@ -70,7 +70,7 @@ public class ShopAdapter extends BaseAdapter {
     class ViewHolder {
         ImageView shopImage;    // 商店图片
         TextView shopName;      // 商店名称
-        TextView shopSales;      // 商店销量
+        TextView shopSales;     // 商店销量
         TextView shopPrice;     // 商店价格
     }
 

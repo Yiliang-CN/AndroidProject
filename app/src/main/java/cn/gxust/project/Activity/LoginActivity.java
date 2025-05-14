@@ -32,6 +32,19 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn = findViewById(R.id.loginBtn);
         loginBtn.setOnClickListener(v -> {
 
+            // 记录登录状态
+            SharedPreferences sharedPreferences = getSharedPreferences("isUserLoggedIn", MODE_PRIVATE);
+            sharedPreferences.edit().putBoolean("isUserLoggedIn", true).apply();
+
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            intent.putExtra("isUserLoggedIn", true);
+
+            // 避免重复创建MainActivity 确保栈中只有一个MainActivity
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            // 查询任务栈的命令: adb shell "dumpsys activity activities | grep '* ActivityRecord{'"
+
+            startActivity(intent);
+
             finish();
         });
     }

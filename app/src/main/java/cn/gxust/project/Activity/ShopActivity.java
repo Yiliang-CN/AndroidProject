@@ -22,9 +22,9 @@ public class ShopActivity extends AppCompatActivity {
     private ShopCmtFragment shopCmtFragment;
     private ShopInfoFragment shopInfoFragment;
 
-    ShopBean shopBean;
-    ImageView btnBack;
-    TextView shopName, shopOrder, shopCmt, shopInfo;
+    private ShopBean shopBean;
+    private ImageView shopBtnBack;
+    private TextView shopName, shopOrder, shopCmt, shopInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +36,13 @@ public class ShopActivity extends AppCompatActivity {
         shopCmtFragment = new ShopCmtFragment();
         shopInfoFragment = new ShopInfoFragment();
 
-        btnBack = findViewById(R.id.btnBack);
+        shopBtnBack = findViewById(R.id.shopBtnBack);
         shopName = findViewById(R.id.shopName);
         shopOrder = findViewById(R.id.shopOrder);
         shopCmt = findViewById(R.id.shopCmt);
         shopInfo = findViewById(R.id.shopInfo);
 
-        btnBack.setOnClickListener(view -> finish());   // 返回按钮 返回到首页
+        shopBtnBack.setOnClickListener(view -> finish());   // 返回按钮 返回到首页
 
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra("shopBean")) {

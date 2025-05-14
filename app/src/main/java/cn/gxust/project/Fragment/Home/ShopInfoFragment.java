@@ -20,12 +20,8 @@ public class ShopInfoFragment extends Fragment {
     public ShopInfoFragment() {
     }
 
-    public static ShopInfoFragment newInstance(ShopBean shopBean) {
-        ShopInfoFragment shopInfoFragment = new ShopInfoFragment();
-        Bundle args = new Bundle();
-        args.putSerializable("shopBean", shopBean);
-        shopInfoFragment.setArguments(args);
-        return shopInfoFragment;
+    public static ShopInfoFragment newInstance() {
+        return new ShopInfoFragment();
     }
 
     @Override

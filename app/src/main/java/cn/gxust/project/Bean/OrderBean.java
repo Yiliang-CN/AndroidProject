@@ -1,50 +1,86 @@
 package cn.gxust.project.Bean;
 
-public class OrderBean {
-    private int orderId;            // 订单编号
-    private int orderUserId;        // 订单用户编号
-    private int orderShopId;        // 订单商家编号
-    private int orderFoodId;        // 订单菜品编号
+import java.io.Serializable;
+
+public class OrderBean implements Serializable {
+    private int orderID;            // 订单编号
+    private int orderShopID;        // 订单商家编号
+    private String orderShopName;   // 订单商家名称
+    private int orderUserID;        // 订单用户编号
+    private String orderUserName;   // 订单用户名称
+    private String orderContent;    // 订单内容
     private int orderNum;           // 订单数量
     private String orderPrice;      // 订单价格
     private String orderTime;       // 订单时间
-    private String orderAddress;    // 订单地址
+    private String orderAddr;    // 订单地址
     private String orderPhone;      // 订单电话
     private String orderState;      // 订单状态
-    private String orderFoodComment;// 菜品评论
-    private String orderShopComment;// 商家评论
+    private String orderComment;    // 菜品评论
     private String orderCommentTime;// 评论时间
 
-    public int getOrderId() {
-        return orderId;
+    public OrderBean(int orderID, int orderShopID, String orderShopName, int orderUserID, String orderUserName, String orderContent, int orderNum, String orderPrice, String orderTime, String orderAddress, String orderPhone, String orderState, String orderComment, String orderCommentTime) {
+        this.orderID = orderID;
+        this.orderShopID = orderShopID;
+        this.orderShopName = orderShopName;
+        this.orderUserID = orderUserID;
+        this.orderUserName = orderUserName;
+        this.orderContent = orderContent;
+        this.orderNum = orderNum;
+        this.orderPrice = orderPrice;
+        this.orderTime = orderTime;
+        this.orderAddr = orderAddress;
+        this.orderPhone = orderPhone;
+        this.orderState = orderState;
+        this.orderComment = orderComment;
+        this.orderCommentTime = orderCommentTime;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public int getOrderID() {
+        return orderID;
     }
 
-    public int getOrderUserId() {
-        return orderUserId;
+    public void setOrderID(int orderID) {
+        this.orderID = orderID;
     }
 
-    public void setOrderUserId(int orderUserId) {
-        this.orderUserId = orderUserId;
+    public int getOrderShopID() {
+        return orderShopID;
     }
 
-    public int getOrderShopId() {
-        return orderShopId;
+    public void setOrderShopID(int orderShopID) {
+        this.orderShopID = orderShopID;
     }
 
-    public void setOrderShopId(int orderShopId) {
-        this.orderShopId = orderShopId;
+    public String getOrderShopName() {
+        return orderShopName;
     }
 
-    public int getOrderFoodId() {
-        return orderFoodId;
+    public void setOrderShopName(String orderShopName) {
+        this.orderShopName = orderShopName;
     }
 
-    public void setOrderFoodId(int orderFoodId) {
-        this.orderFoodId = orderFoodId;
+    public int getOrderUserID() {
+        return orderUserID;
+    }
+
+    public void setOrderUserID(int orderUserID) {
+        this.orderUserID = orderUserID;
+    }
+
+    public String getOrderUserName() {
+        return orderUserName;
+    }
+
+    public void setOrderUserName(String orderUserName) {
+        this.orderUserName = orderUserName;
+    }
+
+    public String getOrderContent() {
+        return orderContent;
+    }
+
+    public void setOrderContent(String orderContent) {
+        this.orderContent = orderContent;
     }
 
     public int getOrderNum() {
@@ -71,12 +107,12 @@ public class OrderBean {
         this.orderTime = orderTime;
     }
 
-    public String getOrderAddress() {
-        return orderAddress;
+    public String getOrderAddr() {
+        return orderAddr;
     }
 
-    public void setOrderAddress(String orderAddress) {
-        this.orderAddress = orderAddress;
+    public void setOrderAddr(String orderAddr) {
+        this.orderAddr = orderAddr;
     }
 
     public String getOrderPhone() {
@@ -95,20 +131,12 @@ public class OrderBean {
         this.orderState = orderState;
     }
 
-    public String getOrderFoodComment() {
-        return orderFoodComment;
+    public String getOrderComment() {
+        return orderComment;
     }
 
-    public void setOrderFoodComment(String orderFoodComment) {
-        this.orderFoodComment = orderFoodComment;
-    }
-
-    public String getOrderShopComment() {
-        return orderShopComment;
-    }
-
-    public void setOrderShopComment(String orderShopComment) {
-        this.orderShopComment = orderShopComment;
+    public void setOrderComment(String orderComment) {
+        this.orderComment = orderComment;
     }
 
     public String getOrderCommentTime() {
@@ -118,6 +146,4 @@ public class OrderBean {
     public void setOrderCommentTime(String orderCommentTime) {
         this.orderCommentTime = orderCommentTime;
     }
-
-
 }
