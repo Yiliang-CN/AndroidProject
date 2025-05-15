@@ -10,7 +10,7 @@
         android:id="@+id/foodImage"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
         android:scaleType="fitCenter"
@@ -44,5 +44,36 @@
         android:gravity="center_vertical"
         android:text="价格"
         android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/foodReduce"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/foodSales"
+        android:layout_toStartOf="@+id/foodNum"
+        android:scaleType="fitCenter"
+        android:src="@drawable/reduce"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/foodNum"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/foodSales"
+        android:layout_toStartOf="@+id/foodAdd"
+        android:gravity="center"
+        android:text="0"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/foodAdd"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/foodSales"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/add"
+        android:textColor="@color/white" />
 
 </RelativeLayout>

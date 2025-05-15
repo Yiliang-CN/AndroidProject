@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,15 +24,27 @@ public class ShopOrderFragment extends Fragment {
     private ShopOrderFoodFragment shopOrderFoodFragment;
 
     private List<FoodBean> foodBeanList;
-    private Set<String> foodBeanType;
+    private Set<String> foodBeanTypeHash;
     private List<String> foodBeanTypeList;
 
     // 模拟数据
-    int[] foodID = {1, 2, 3, 4, 5, 6, 7, 8};
-    String[] foodName = {"小炒肉", "小炒牛", "小炒鸡", "小炒鸭", "小炒羊", "小炒猪", "小炒牛", "小炒鸡"};
-    String[] foodType = {"热销", "热销", "热销", "爆款", "爆款", "爆款", "推荐", "推荐"};
-    String[] foodSales = {"1000", "1000", "1000", "1000", "1000", "1000", "1000", "1000"};
-    String[] foodPrice = {"10", "10", "10", "10", "10", "10", "10", "10"};
+    int[] foodID = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
+    String[] foodName = {"小炒肉", "小炒牛", "小炒鸡", "小炒鸭", "小炒羊", "小炒猪", "小炒鱼", "小炒兔",
+            "红烧肉", "糖醋排骨", "水煮鱼", "宫保鸡丁",
+            "麻辣香锅", "酸菜鱼", "回锅肉", "麻婆豆腐",
+            "烤全羊", "北京烤鸭", "佛跳墙", "龙虾盛宴"};
+    String[] foodType = {"热销", "热销", "推荐", "爆款", "爆款", "热销", "推荐", "推荐",
+            "热销", "热销", "热销", "热销",
+            "推荐", "推荐", "推荐", "推荐",
+            "爆款", "爆款", "爆款", "爆款"};
+    String[] foodSales = {"1000", "1000", "1000", "1000", "1000", "1000", "1000", "1000",
+            "950", "900", "850", "800",
+            "750", "700", "650", "600",
+            "2000", "1800", "1500", "1200"};
+    String[] foodPrice = {"10", "10", "10", "10", "10", "10", "10", "10",
+            "15", "18", "20", "16",
+            "22", "25", "18", "12",
+            "88", "68", "128", "158"};
 
     public ShopOrderFragment() {
     }
@@ -52,12 +65,20 @@ public class ShopOrderFragment extends Fragment {
         }
 
         // 获取所有菜品类别
-        foodBeanType = new HashSet<>();
+        foodBeanTypeHash = new HashSet<>();
         for (FoodBean foodBean : foodBeanList) {
-            foodBeanType.add(foodBean.getFoodType());
+            foodBeanTypeHash.add(foodBean.getFoodType());
         }
-        foodBeanTypeList = new ArrayList<>(foodBeanType);
+        foodBeanTypeList = new ArrayList<>(foodBeanTypeHash);
 
+        // 将存储菜品信息的List根据菜品类别进行排序
+        Collections.sort(foodBeanList, (food1, food2) -> {
+            int index1 = foodBeanTypeList.indexOf(food1.getFoodType());
+            int index2 = foodBeanTypeList.indexOf(food2.getFoodType());
+            return Integer.compare(index1, index2);
+        });
+
+        // 添加一个"全部"类别到foodBeanTypeList的最前面
         foodBeanTypeList.add(0, "全部");
     }
 
@@ -89,27 +110,25 @@ public class ShopOrderFragment extends Fragment {
         }
         fragmentTransaction.replace(R.id.shopOrderBlankLayout, shopOrderFoodFragment);
 
+        // 提交事务
         fragmentTransaction.commit();
-
         return rootView;
     }
 
-    // 更新菜品列表
-    public void updateFoodBeanList(String foodType) {
-        List<FoodBean> foodBeanList = new ArrayList<>();
+    // 找到对应类别的位置
+    public void findFoodTypePosition(String foodType) {
 
-        if (foodType.equals("全部")) {
-            foodBeanList = this.foodBeanList;
-        } else {
-            for (FoodBean foodBean : this.foodBeanList) {
-                if (foodBean.getFoodType().equals(foodType)) {
-                    foodBeanList.add(foodBean);
-                }
-            }
+        if ("全部".equals(foodType)) {
+            shopOrderFoodFragment.scrollToPosition(0);
+            return;
         }
 
-        if (shopOrderFoodFragment != null) {
-            shopOrderFoodFragment.updateFoodList(foodBeanList);
+        for (FoodBean foodBean : foodBeanList) {
+            if (foodType.equals(foodBean.getFoodType())) {
+                int position = foodBeanList.indexOf(foodBean);
+                shopOrderFoodFragment.scrollToPosition(position);
+                return;
+            }
         }
     }
 }

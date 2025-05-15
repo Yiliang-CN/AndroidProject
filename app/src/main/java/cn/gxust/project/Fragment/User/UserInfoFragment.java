@@ -37,10 +37,11 @@ public class UserInfoFragment extends Fragment {
         userInfoLoginOut = rootView.findViewById(R.id.userInfoLoginOut);
         userInfoLoginOut.setOnClickListener(v -> {
             // 记录登录状态
-            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("isUserLoggedIn", getActivity().MODE_PRIVATE);
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("userLoginStatus", getActivity().MODE_PRIVATE);
             sharedPreferences.edit().putBoolean("isUserLoggedIn", false).apply();
 
-            if(getActivity() instanceof MainActivity){
+            // 调用MainActivity的方法 切换显示的Fragment
+            if (getActivity() instanceof MainActivity) {
                 ((MainActivity) getActivity()).userLoginOutChangeFragment();
             }
         });

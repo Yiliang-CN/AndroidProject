@@ -3,20 +3,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:weightSum="7"
+    android:orientation="vertical"
+    android:weightSum="10"
     tools:context=".Fragment.Home.ShopOrderFragment">
 
-    <FrameLayout
-        android:id="@+id/shopOrderNavBlankLayout"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="2" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:orientation="horizontal"
+        android:weightSum="8">
 
-    <FrameLayout
-        android:id="@+id/shopOrderBlankLayout"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="5" />
+        <FrameLayout
+            android:id="@+id/shopOrderNavBlankLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2" />
+
+        <FrameLayout
+            android:id="@+id/shopOrderBlankLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:src="@drawable/cart" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:text="价格"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/paymentBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_weight="2"
+            android:text="去付款"
+            android:textSize="16sp" />
+
+    </LinearLayout>
 
 </LinearLayout>

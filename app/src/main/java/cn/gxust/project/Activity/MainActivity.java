@@ -36,13 +36,6 @@ public class MainActivity extends AppCompatActivity {
                     .replace(R.id.mainBlankLayout, homeFragment)
                     .commit();
         }
-
-        // 判断用户是否登录
-        if (getIntent().getBooleanExtra("isUserLoggedIn", false)) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.mainBlankLayout, userInfoFragment)
-                    .commit();
-        }
     }
 
     public void switch_mainpage(View view) {
@@ -66,10 +59,9 @@ public class MainActivity extends AppCompatActivity {
 
     // 判断用户是否登录
     private boolean isUserLoggedIn() {
-        SharedPreferences sharedPreferences = getSharedPreferences("isUserLoggedIn", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("userLoginStatus", MODE_PRIVATE);
         return sharedPreferences.getBoolean("isUserLoggedIn", false);   // 默认为未登录
     }
-
 
     // 用户退出登录后，切换到用户登录注册页面
     public void userLoginOutChangeFragment() {

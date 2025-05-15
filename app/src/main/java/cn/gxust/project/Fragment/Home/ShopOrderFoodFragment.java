@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,8 @@ public class ShopOrderFoodFragment extends Fragment {
         return rootView;
     }
 
-    public void updateFoodList(List<FoodBean> foodBeanList) {
-        foodAdapter.updateList(foodBeanList);
+    // 根据分类的选择  滚动到指定位置
+    public void scrollToPosition(int position) {
+        foodListView.smoothScrollToPosition(position);
     }
 }

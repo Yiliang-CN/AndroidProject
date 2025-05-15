@@ -12,7 +12,7 @@ public class OrderBean implements Serializable {
     private int orderNum;           // 订单数量
     private String orderPrice;      // 订单价格
     private String orderTime;       // 订单时间
-    private String orderAddr;    // 订单地址
+    private String orderAddr;       // 订单地址
     private String orderPhone;      // 订单电话
     private String orderState;      // 订单状态
     private String orderComment;    // 菜品评论

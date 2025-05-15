@@ -1,6 +1,7 @@
 package cn.gxust.project.Adapter;
 
 import android.content.Context;
+import android.util.SparseIntArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -22,6 +23,7 @@ public class FoodAdapter extends BaseAdapter {
     }
 
     public void updateList(List<FoodBean> foodBean) {
+
         this.foodBean = foodBean;
         notifyDataSetChanged();
     }
@@ -52,6 +54,9 @@ public class FoodAdapter extends BaseAdapter {
             holder.foodName = convertView.findViewById(R.id.foodName);
             holder.foodSales = convertView.findViewById(R.id.foodSales);
             holder.foodPrice = convertView.findViewById(R.id.foodPrice);
+            holder.foodAdd = convertView.findViewById(R.id.foodAdd);
+            holder.foodNum = convertView.findViewById(R.id.foodNum);
+            holder.foodReduce = convertView.findViewById(R.id.foodReduce);
 
             convertView.setTag(holder);
         } else {
@@ -63,6 +68,22 @@ public class FoodAdapter extends BaseAdapter {
         holder.foodSales.setText(foodBean.get(position).getFoodSales());
         holder.foodPrice.setText(foodBean.get(position).getFoodPrice());
 
+        holder.foodReduce.setOnClickListener(v -> {
+            String numString = holder.foodNum.getText().toString();
+            if (Integer.parseInt(numString) > 0) {
+                numString = String.valueOf(Integer.parseInt(numString) - 1);
+                holder.foodNum.setText(numString);
+            }
+        });
+
+        holder.foodAdd.setOnClickListener(v -> {
+            String numString = holder.foodNum.getText().toString();
+            if (Integer.parseInt(numString) < 9) {
+                numString = String.valueOf(Integer.parseInt(numString) + 1);
+                holder.foodNum.setText(numString);
+            }
+        });
+
         return convertView;
     }
 
@@ -71,5 +92,8 @@ public class FoodAdapter extends BaseAdapter {
         TextView foodName;
         TextView foodSales;
         TextView foodPrice;
+        ImageView foodReduce;
+        TextView foodNum;
+        ImageView foodAdd;
     }
 }
