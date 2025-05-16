@@ -16,10 +16,17 @@ import cn.gxust.project.R;
 public class OrderAdapter extends BaseAdapter {
     private List<OrderBean> orderBean;
     private Context context;
+    private OnOrderAdapterListener listener;
 
-    public OrderAdapter(List<OrderBean> orderBean, Context context) {
+
+    public OrderAdapter(List<OrderBean> orderBean, Context context, OnOrderAdapterListener listener) {
         this.orderBean = orderBean;
         this.context = context;
+        this.listener = listener;
+    }
+
+    public interface OnOrderAdapterListener {
+        void onOrderShopNameClick(OrderBean orderBean);
     }
 
     @Override
@@ -59,16 +66,14 @@ public class OrderAdapter extends BaseAdapter {
         holder.orderShopName.setText(orderBean.get(position).getOrderShopName());
         holder.orderID.setText(String.valueOf(orderBean.get(position).getOrderID()));
         holder.orderContent.setText(orderBean.get(position).getOrderContent());
-        holder.orderPrice.setText(orderBean.get(position).getOrderPrice());
+        holder.orderPrice.setText(String.valueOf(orderBean.get(position).getOrderPrice()));
         holder.orderTime.setText(orderBean.get(position).getOrderTime());
         holder.orderState.setText(orderBean.get(position).getOrderState());
 
         holder.orderShopName.setOnClickListener(v -> {
-            OrderBean bean = orderBean.get(position);
-            Intent intent = new Intent(context, OrderActivity.class);
-            intent.putExtra("orderBean", bean);
-            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT); // 设置启动标志，使得Activity在栈顶
-            context.startActivity(intent);
+            if (listener != null) {
+                listener.onOrderShopNameClick(orderBean.get(position));
+            }
         });
 
         return convertView;

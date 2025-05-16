@@ -4,17 +4,17 @@ public class CmtBean {
     private int cmtID;              // 评论ID
     private String cmtUserID;       // 评论用户ID
     private String cmtUserName;     // 评论用户名
-    private String cmtType;         // 评论类型
+    private int cmtShopID;          // 评论店铺ID
     private String cmtScore;        // 评分
     private String cmtTime;         // 评论时间
     private String cmtContent;      // 评论内容
     private String cmtUserImage;    // 用户头像
 
-    public CmtBean(int cmtID, String cmtUserID, String cmtUserName, String cmtType, String cmtScore, String cmtTime, String cmtContent, String cmtUserImage) {
+    public CmtBean(int cmtID, String cmtUserID, String cmtUserName, int cmtShopID, String cmtScore, String cmtTime, String cmtContent, String cmtUserImage) {
         this.cmtID = cmtID;
         this.cmtUserID = cmtUserID;
         this.cmtUserName = cmtUserName;
-        this.cmtType = cmtType;
+        this.cmtShopID = cmtShopID;
         this.cmtScore = cmtScore;
         this.cmtTime = cmtTime;
         this.cmtContent = cmtContent;
@@ -45,12 +45,12 @@ public class CmtBean {
         this.cmtUserName = cmtUserName;
     }
 
-    public String getCmtType() {
-        return cmtType;
+    public int getCmtShopID() {
+        return cmtShopID;
     }
 
-    public void setCmtType(String cmtType) {
-        this.cmtType = cmtType;
+    public void setCmtShopID(int cmtShopID) {
+        this.cmtShopID = cmtShopID;
     }
 
     public String getCmtScore() {

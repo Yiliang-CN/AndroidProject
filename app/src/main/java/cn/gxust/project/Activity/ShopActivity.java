@@ -1,6 +1,7 @@
 package cn.gxust.project.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -50,6 +51,14 @@ public class ShopActivity extends AppCompatActivity {
             if (shopBean != null) {
                 shopName.setText(shopBean.getShopName());  // 设置店名
             }
+
+            SharedPreferences sharedPreferences = getSharedPreferences("shopInfo", MODE_PRIVATE);
+            sharedPreferences.edit().putInt("shopID", shopBean.getShopID()).apply();
+            sharedPreferences.edit().putString("shopName", shopBean.getShopName()).apply();
+            sharedPreferences.edit().putString("shopSales", shopBean.getShopSales()).apply();
+            sharedPreferences.edit().putString("shopPrice", shopBean.getShopPrice()).apply();
+            sharedPreferences.edit().putString("shopPhone", shopBean.getShopPhone()).apply();
+            sharedPreferences.edit().putString("shopAddr", shopBean.getShopAddr()).apply();
         }
 
         // 设置默认页面
@@ -60,7 +69,7 @@ public class ShopActivity extends AppCompatActivity {
         }
     }
 
-    public void switch_shoppage(View view) {
+    public void switchShopPage(View view) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
         Bundle bundle = new Bundle();

@@ -50,9 +50,9 @@ public class ShopOrderNavFragment extends Fragment {
         foodNavListView.setOnItemClickListener((parent, view, position, id) -> {
             // 获取点击的分类
             String foodType = foodBeanTypeList.get(position);
-            // 调用父类中的方法
-            if(getParentFragment() instanceof ShopOrderFragment){
-                ((ShopOrderFragment)getParentFragment()).findFoodTypePosition(foodType);
+            // 更新父级fragment的FoodBeanList
+            if (getParentFragment() instanceof ShopOrderFragment) {
+                ((ShopOrderFragment) getParentFragment()).updateFoodBeanList(foodType);
             }
         });
 

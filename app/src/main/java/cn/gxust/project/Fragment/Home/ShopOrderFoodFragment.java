@@ -4,12 +4,13 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import cn.gxust.project.Adapter.FoodAdapter;
@@ -17,10 +18,24 @@ import cn.gxust.project.Bean.FoodBean;
 import cn.gxust.project.R;
 
 
-public class ShopOrderFoodFragment extends Fragment {
+public class ShopOrderFoodFragment extends Fragment implements FoodAdapter.OnFoodAdapterListener {
     private ListView foodListView;
     private List<FoodBean> foodBeanList;
+    private List<FoodBean> foodBeanListOnCart;
     private FoodAdapter foodAdapter;
+
+    // 定义更新购物车监听器
+    private OnUpdateCartListener listener;
+
+    // 更新购物车监听器
+    public interface OnUpdateCartListener {
+        void onUpdateCart(List<FoodBean> foodBeanList);
+    }
+
+    // 设置更新购物车监听器
+    public void setOnUpdateCartListener(OnUpdateCartListener listener) {
+        this.listener = listener;
+    }
 
     public ShopOrderFoodFragment() {
     }
@@ -36,6 +51,8 @@ public class ShopOrderFoodFragment extends Fragment {
         if (getArguments() != null) {
             foodBeanList = (List<FoodBean>) getArguments().getSerializable("foodBeanList");
         }
+
+        foodBeanListOnCart = new ArrayList<>();
     }
 
     @Override
@@ -46,15 +63,73 @@ public class ShopOrderFoodFragment extends Fragment {
         // 初始化ListView
         foodListView = rootView.findViewById(R.id.foodListView);
 
-        // 创建并设置Adapter
-        foodAdapter = new FoodAdapter(foodBeanList, getActivity());
+        // 创建并设置Adapter 将当前Fragment作为点击监听器传入
+        foodAdapter = new FoodAdapter(foodBeanList, getActivity(), this);
         foodListView.setAdapter(foodAdapter);
 
         return rootView;
     }
 
-    // 根据分类的选择  滚动到指定位置
-    public void scrollToPosition(int position) {
-        foodListView.smoothScrollToPosition(position);
+    // 更新菜品列表
+    public void updateFoodBeanList(List<FoodBean> foodBeanList) {
+        foodAdapter.updateFoodAdapterFoodBean(foodBeanList);
     }
+
+    // 添加菜品信息到购物车
+    private void updateFoodBeanListToCart(FoodBean foodBean) {
+        // 使用迭代器
+        boolean isUpdate = false;
+        Iterator<FoodBean> foodBeanOnCart = foodBeanListOnCart.iterator();
+        while (foodBeanOnCart.hasNext()) {
+            FoodBean foodBeanOnCartItem = foodBeanOnCart.next();
+
+            // 如果购物车中存在该菜品
+            if (foodBeanOnCartItem.getFoodID() == foodBean.getFoodID()) {
+                isUpdate = true;
+                if (foodBean.getFoodNum() > 0) {
+                    // 数量不为0 则替换原有内容
+                    foodBeanOnCart.remove();
+                    foodBeanListOnCart.add(foodBean);
+                } else {
+                    // 数量为0 则移除
+                    foodBeanOnCart.remove();
+                }
+                break;
+            }
+        }
+
+        // 如果不存在该菜品 且数量大于0 则添加
+        if (!isUpdate && foodBean.getFoodNum() > 0) {
+            foodBeanListOnCart.add(foodBean);
+        }
+
+        // 更新购物车列表
+        if (listener != null) {
+            listener.onUpdateCart(foodBeanListOnCart);
+        }
+    }
+
+    // 菜品项中 减少按钮 的点击事件
+    @Override
+    public void onFoodReduceClick(int position) {
+        FoodBean foodBean = foodBeanList.get(position);
+        if (foodBean.getFoodNum() > 0) {
+            foodBean.setFoodNum(foodBean.getFoodNum() - 1);
+            updateFoodBeanListToCart(foodBean);     // 更新购物车列表
+            foodAdapter.notifyDataSetChanged();     // 通知适配器进行数据更新
+        }
+    }
+
+    // 菜品项中 增加按钮 的点击事件
+    @Override
+    public void onFoodAddClick(int position) {
+        FoodBean foodBean = foodBeanList.get(position);
+        if (foodBean.getFoodNum() < 9) {
+            foodBean.setFoodNum(foodBean.getFoodNum() + 1);
+            updateFoodBeanListToCart(foodBean);     // 更新购物车列表
+            foodAdapter.notifyDataSetChanged();     // 通知适配器进行数据更新
+        }
+    }
+
+
 }

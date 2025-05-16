@@ -6,26 +6,24 @@ public class OrderBean implements Serializable {
     private int orderID;            // 订单编号
     private int orderShopID;        // 订单商家编号
     private String orderShopName;   // 订单商家名称
-    private int orderUserID;        // 订单用户编号
+    private Long orderUserID;       // 订单用户编号
     private String orderUserName;   // 订单用户名称
     private String orderContent;    // 订单内容
-    private int orderNum;           // 订单数量
-    private String orderPrice;      // 订单价格
+    private double orderPrice;      // 订单价格
     private String orderTime;       // 订单时间
     private String orderAddr;       // 订单地址
-    private String orderPhone;      // 订单电话
+    private Long orderPhone;        // 订单电话
     private String orderState;      // 订单状态
-    private String orderComment;    // 菜品评论
+    private String orderComment;    // 订单评论
     private String orderCommentTime;// 评论时间
 
-    public OrderBean(int orderID, int orderShopID, String orderShopName, int orderUserID, String orderUserName, String orderContent, int orderNum, String orderPrice, String orderTime, String orderAddress, String orderPhone, String orderState, String orderComment, String orderCommentTime) {
+    public OrderBean(int orderID, int orderShopID, String orderShopName, Long orderUserID, String orderUserName, String orderContent, double orderPrice, String orderTime, String orderAddress, Long orderPhone, String orderState, String orderComment, String orderCommentTime) {
         this.orderID = orderID;
         this.orderShopID = orderShopID;
         this.orderShopName = orderShopName;
         this.orderUserID = orderUserID;
         this.orderUserName = orderUserName;
         this.orderContent = orderContent;
-        this.orderNum = orderNum;
         this.orderPrice = orderPrice;
         this.orderTime = orderTime;
         this.orderAddr = orderAddress;
@@ -59,11 +57,11 @@ public class OrderBean implements Serializable {
         this.orderShopName = orderShopName;
     }
 
-    public int getOrderUserID() {
+    public Long getOrderUserID() {
         return orderUserID;
     }
 
-    public void setOrderUserID(int orderUserID) {
+    public void setOrderUserID(Long orderUserID) {
         this.orderUserID = orderUserID;
     }
 
@@ -83,19 +81,11 @@ public class OrderBean implements Serializable {
         this.orderContent = orderContent;
     }
 
-    public int getOrderNum() {
-        return orderNum;
-    }
-
-    public void setOrderNum(int orderNum) {
-        this.orderNum = orderNum;
-    }
-
-    public String getOrderPrice() {
+    public double getOrderPrice() {
         return orderPrice;
     }
 
-    public void setOrderPrice(String orderPrice) {
+    public void setOrderPrice(double orderPrice) {
         this.orderPrice = orderPrice;
     }
 
@@ -115,11 +105,11 @@ public class OrderBean implements Serializable {
         this.orderAddr = orderAddr;
     }
 
-    public String getOrderPhone() {
+    public Long getOrderPhone() {
         return orderPhone;
     }
 
-    public void setOrderPhone(String orderPhone) {
+    public void setOrderPhone(Long orderPhone) {
         this.orderPhone = orderPhone;
     }
 

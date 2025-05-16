@@ -45,7 +45,7 @@ public class ShopCmtFragment extends Fragment {
         cmtAdapter = new CmtAdapter(cmtBeanList, getContext());
 
         for (int i = 0; i < cmtID.length; i++) {
-            CmtBean cmtBean = new CmtBean(cmtID[i], null, cmtUserName[i], null, cmtScore[i], cmtTime[i], cmtContent[i], null);
+            CmtBean cmtBean = new CmtBean(cmtID[i], null, cmtUserName[i], 0, cmtScore[i], cmtTime[i], cmtContent[i], null);
             cmtBeanList.add(cmtBean);
         }
     }

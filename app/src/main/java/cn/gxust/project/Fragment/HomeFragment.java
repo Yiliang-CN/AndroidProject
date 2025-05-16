@@ -65,13 +65,18 @@ public class HomeFragment extends Fragment {
 
         // 设置每项的点击事件
         shopListView.setOnItemClickListener((parent, view, position, id) -> {
-            ShopBean shopBean = shopBeanList.get(position);
-            Intent intent = new Intent(getActivity(), ShopActivity.class);
-            intent.putExtra("shopBean", shopBean);
-            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT); // 设置启动标志，使得Activity在栈顶
-            startActivity(intent);
+            setShopListViewOnItemClickListener(position);
         });
 
         return rootView;
+    }
+
+    // 设置ListView的每个项的点击事件
+    private void setShopListViewOnItemClickListener(int position) {
+        ShopBean shopBean = shopBeanList.get(position);
+        Intent intent = new Intent(getActivity(), ShopActivity.class);
+        intent.putExtra("shopBean", shopBean);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT); // 设置启动标志，使得Activity在栈顶
+        startActivity(intent);
     }
 }

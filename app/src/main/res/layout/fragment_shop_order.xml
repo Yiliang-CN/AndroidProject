@@ -47,6 +47,7 @@
             android:src="@drawable/cart" />
 
         <TextView
+            android:id="@+id/shopOrderFoodSales"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -57,7 +58,7 @@
             android:textSize="24sp" />
 
         <Button
-            android:id="@+id/paymentBtn"
+            android:id="@+id/shopOrderPayBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"

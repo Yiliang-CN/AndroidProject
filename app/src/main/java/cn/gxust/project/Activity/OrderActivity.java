@@ -50,10 +50,10 @@ public class OrderActivity extends AppCompatActivity {
                 orderShopName.setText(orderBean.getOrderShopName());
                 orderUserName.setText(orderBean.getOrderUserName());
                 orderContent.setText(orderBean.getOrderContent());
-                orderPrice.setText(orderBean.getOrderPrice());
+                orderPrice.setText(String.valueOf(orderBean.getOrderPrice()));
                 orderTime.setText(orderBean.getOrderTime());
                 orderAddr.setText(orderBean.getOrderAddr());
-                orderPhone.setText(orderBean.getOrderPhone());
+                orderPhone.setText(String.valueOf(orderBean.getOrderPhone()));
                 orderState.setText(orderBean.getOrderState());
             }
         }

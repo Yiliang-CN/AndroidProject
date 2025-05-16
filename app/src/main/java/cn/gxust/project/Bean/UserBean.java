@@ -1,20 +1,19 @@
 package cn.gxust.project.Bean;
 
 public class UserBean {
-    private int userID;             // 用户ID
+    private Long userID;            // 用户ID
     private String userName;        // 用户名
     private String userPassword;    // 用户密码
     private String userSex;         // 用户性别
     private String userBirthday;    // 用户生日
-    private String userPhone;       // 用户手机
-    private String userAddress;     // 用户地址
+    private Long userPhone;         // 用户手机号
     private String userImage;       // 用户头像
 
-    public int getUserID() {
+    public Long getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(Long userID) {
         this.userID = userID;
     }
 
@@ -50,20 +49,12 @@ public class UserBean {
         this.userBirthday = userBirthday;
     }
 
-    public String getUserPhone() {
+    public Long getUserPhone() {
         return userPhone;
     }
 
-    public void setUserPhone(String userPhone) {
+    public void setUserPhone(Long userPhone) {
         this.userPhone = userPhone;
-    }
-
-    public String getUserAddress() {
-        return userAddress;
-    }
-
-    public void setUserAddress(String userAddress) {
-        this.userAddress = userAddress;
     }
 
     public String getUserImage() {

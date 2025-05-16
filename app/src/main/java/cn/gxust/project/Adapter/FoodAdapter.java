@@ -1,7 +1,6 @@
 package cn.gxust.project.Adapter;
 
 import android.content.Context;
-import android.util.SparseIntArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -16,16 +15,27 @@ import cn.gxust.project.R;
 public class FoodAdapter extends BaseAdapter {
     private List<FoodBean> foodBean;
     private Context context;
+    private OnFoodAdapterListener listener;
 
-    public FoodAdapter(List<FoodBean> foodBean, Context context) {
+    public FoodAdapter(List<FoodBean> foodBean, Context context, OnFoodAdapterListener listener) {
         this.foodBean = foodBean;
         this.context = context;
+        this.listener = listener;
     }
 
-    public void updateList(List<FoodBean> foodBean) {
+    // 监听器
+    public interface OnFoodAdapterListener {
+        void onFoodReduceClick(int position);       // 减少按钮点击事件 在Fragment中实现
 
-        this.foodBean = foodBean;
-        notifyDataSetChanged();
+        void onFoodAddClick(int position);          // 增加按钮点击事件 在Fragment中实现
+    }
+
+    // 此方法用于更新菜品列表数据
+    public void updateFoodAdapterFoodBean(List<FoodBean> foodBeanList) {
+        this.foodBean.clear();
+        this.foodBean.addAll(foodBeanList);
+//        this.foodBean = foodBeanList;
+        notifyDataSetChanged(); // 刷新ListView
     }
 
     @Override
@@ -65,22 +75,21 @@ public class FoodAdapter extends BaseAdapter {
 
 //        holder.foodImage.setImageResource(foodBean.get(position).getFoodImage());
         holder.foodName.setText(foodBean.get(position).getFoodName());
-        holder.foodSales.setText(foodBean.get(position).getFoodSales());
-        holder.foodPrice.setText(foodBean.get(position).getFoodPrice());
+        holder.foodSales.setText(String.valueOf(foodBean.get(position).getFoodSales()));
+        holder.foodPrice.setText(String.valueOf(foodBean.get(position).getFoodPrice()));
+        holder.foodNum.setText(String.valueOf(foodBean.get(position).getFoodNum()));
 
+        // 减少按钮点击事件
         holder.foodReduce.setOnClickListener(v -> {
-            String numString = holder.foodNum.getText().toString();
-            if (Integer.parseInt(numString) > 0) {
-                numString = String.valueOf(Integer.parseInt(numString) - 1);
-                holder.foodNum.setText(numString);
+            if (listener != null) {
+                listener.onFoodReduceClick(position);
             }
         });
 
+        // 增加按钮点击事件
         holder.foodAdd.setOnClickListener(v -> {
-            String numString = holder.foodNum.getText().toString();
-            if (Integer.parseInt(numString) < 9) {
-                numString = String.valueOf(Integer.parseInt(numString) + 1);
-                holder.foodNum.setText(numString);
+            if (listener != null) {
+                listener.onFoodAddClick(position);
             }
         });
 

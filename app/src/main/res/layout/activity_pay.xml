@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:weightSum="11"
+    tools:context=".Activity.PayActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/payBtnBack"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="8dp"
+            android:background="@color/white"
+            android:scaleType="fitCenter"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:id="@+id/payTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="支付订单"
+            android:textSize="32sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="32dp"
+            android:paddingBottom="240dp">
+
+            <TextView
+                android:id="@+id/payOrderShopNameText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:text="商家名称"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/payOrderShopName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toEndOf="@+id/payOrderShopNameText"
+                android:gravity="center_vertical"
+                android:text="商家名称"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/payOrderUserNameText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/payOrderShopNameText"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:text="用户名称"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/payOrderUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/payOrderShopNameText"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toEndOf="@+id/payOrderUserNameText"
+                android:gravity="center_vertical"
+                android:text="用户名称"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/payOrderContentText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/payOrderUserNameText"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:text="订单内容"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/payOrderContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/payOrderUserNameText"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:layout_toEndOf="@+id/payOrderContentText"
+                android:minHeight="100dp"
+                android:text="订单内容"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/payOrderPriceText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/payOrderContent"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:text="订单价格"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/payOrderPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/payOrderContent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toEndOf="@+id/payOrderPriceText"
+                android:gravity="center_vertical"
+                android:text="订单价格"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/payOrderTimeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/payOrderPriceText"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:text="订单时间"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/payOrderTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/payOrderPriceText"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toEndOf="@+id/payOrderTimeText"
+                android:gravity="center_vertical"
+                android:text="订单时间"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/payOrderAddrText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/payOrderTimeText"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:text="订单地址"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/payOrderAddr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/payOrderTimeText"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toEndOf="@+id/payOrderAddrText"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="地址"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/payOrderPhoneText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/payOrderAddrText"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:text="订单电话"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/payOPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/payOrderAddrText"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toEndOf="@+id/payOrderPhoneText"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="电话"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/payOrderStateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/payOrderPhoneText"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:text="订单状态"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/payOrderState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/payOrderPhoneText"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toEndOf="@+id/payOrderStateText"
+                android:gravity="center_vertical"
+                android:text="订单状态"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/payBtn"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/payOrderStateText"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="64dp"
+                android:text="支付"
+                android:textSize="24sp" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</LinearLayout>
