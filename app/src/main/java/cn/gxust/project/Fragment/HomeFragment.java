@@ -26,9 +26,9 @@ public class HomeFragment extends Fragment {
     // 模拟数据
     private int[] shopID = {1, 2, 3, 4, 5, 6, 7, 8};
     private String[] shopName = {"商店一号店铺", "商店二号店铺", "商店三号店铺", "商店四号店铺", "商店五号店铺", "商店六号店铺", "商店七号店铺", "商店八号店铺"};
-    private String[] shopSales = {"1000", "2000", "3000", "4000", "5000", "6000", "7000", "8000"};
-    private String[] shopPrice = {"100", "200", "300", "400", "500", "600", "700", "800"};
-    private String[] shopPhone = {"1111", "2222", "3333", "4444", "5555", "6666", "7777", "8888"};
+    private int[] shopSales = {1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000};
+    private double[] shopPrice = {100.0, 200.0, 300.0, 400.0, 500.0, 600.0, 700.0, 800.0};
+    private Long[] shopPhone = {1111L, 2222L, 3333L, 4444L, 5555L, 6666L, 7777L, 8888L};
     private String[] shopAddr = {"地址1", "地址2", "地址3", "地址4", "地址5", "地址6", "地址7", "地址8"};
 
 
@@ -64,19 +64,17 @@ public class HomeFragment extends Fragment {
         shopListView.setAdapter(shopAdapter);
 
         // 设置每项的点击事件
-        shopListView.setOnItemClickListener((parent, view, position, id) -> {
-            setShopListViewOnItemClickListener(position);
-        });
+        shopListView.setOnItemClickListener((parent, view, position, id) -> setShopListViewOnItemClickListener(position));
 
         return rootView;
     }
 
-    // 设置ListView的每个项的点击事件
+    // 实现ListView中每个项的点击事件
     private void setShopListViewOnItemClickListener(int position) {
         ShopBean shopBean = shopBeanList.get(position);
         Intent intent = new Intent(getActivity(), ShopActivity.class);
         intent.putExtra("shopBean", shopBean);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT); // 设置启动标志，使得Activity在栈顶
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT); // 设置启动标志 复用现有实例 使ShopActivity在栈顶
         startActivity(intent);
     }
 }

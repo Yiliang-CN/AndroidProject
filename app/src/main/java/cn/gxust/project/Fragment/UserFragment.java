@@ -35,18 +35,33 @@ public class UserFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_user, container, false);
 
-        userLoginBtn = rootView.findViewById(R.id.userLoginBtn);
-        userLoginBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), LoginActivity.class);
-            startActivity(intent);
-        });
+        // 初始化UI控件
+        initUI(rootView);
 
-        userRegisterBtn = rootView.findViewById(R.id.userRegisterBtn);
-        userRegisterBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), RegisterActivity.class);
-            startActivity(intent);
-        });
+        // 设置登录按钮点击事件
+        userLoginBtn.setOnClickListener(v -> setUserLoginBtnOnClickListener());
+
+        // 设置注册按钮点击事件
+        userRegisterBtn.setOnClickListener(v -> setUserRegisterBtnOnClickListener());
 
         return rootView;
+    }
+
+    // 登录按钮点击事件
+    private void setUserLoginBtnOnClickListener() {
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        startActivity(intent);
+    }
+
+    // 注册按钮点击事件
+    private void setUserRegisterBtnOnClickListener() {
+        Intent intent = new Intent(getActivity(), RegisterActivity.class);
+        startActivity(intent);
+    }
+
+    // 初始化UI控件
+    private void initUI(View rootView) {
+        userLoginBtn = rootView.findViewById(R.id.userLoginBtn);
+        userRegisterBtn = rootView.findViewById(R.id.userRegisterBtn);
     }
 }

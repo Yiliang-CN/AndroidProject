@@ -1,16 +1,16 @@
 package cn.gxust.project.Bean;
 
 public class CmtBean {
-    private int cmtID;              // 评论ID
-    private String cmtUserID;       // 评论用户ID
+    private Long cmtID;              // 评论ID
+    private Long cmtUserID;         // 评论用户ID
     private String cmtUserName;     // 评论用户名
     private int cmtShopID;          // 评论店铺ID
-    private String cmtScore;        // 评分
+    private int cmtScore;           // 评分
     private String cmtTime;         // 评论时间
     private String cmtContent;      // 评论内容
     private String cmtUserImage;    // 用户头像
 
-    public CmtBean(int cmtID, String cmtUserID, String cmtUserName, int cmtShopID, String cmtScore, String cmtTime, String cmtContent, String cmtUserImage) {
+    public CmtBean(Long cmtID, Long cmtUserID, String cmtUserName, int cmtShopID, int cmtScore, String cmtTime, String cmtContent, String cmtUserImage) {
         this.cmtID = cmtID;
         this.cmtUserID = cmtUserID;
         this.cmtUserName = cmtUserName;
@@ -21,19 +21,19 @@ public class CmtBean {
         this.cmtUserImage = cmtUserImage;
     }
 
-    public int getCmtID() {
+    public Long getCmtID() {
         return cmtID;
     }
 
-    public void setCmtID(int cmtID) {
+    public void setCmtID(Long cmtID) {
         this.cmtID = cmtID;
     }
 
-    public String getCmtUserID() {
+    public Long getCmtUserID() {
         return cmtUserID;
     }
 
-    public void setCmtUserID(String cmtUserID) {
+    public void setCmtUserID(Long cmtUserID) {
         this.cmtUserID = cmtUserID;
     }
 
@@ -53,11 +53,11 @@ public class CmtBean {
         this.cmtShopID = cmtShopID;
     }
 
-    public String getCmtScore() {
+    public int getCmtScore() {
         return cmtScore;
     }
 
-    public void setCmtScore(String cmtScore) {
+    public void setCmtScore(int cmtScore) {
         this.cmtScore = cmtScore;
     }
 

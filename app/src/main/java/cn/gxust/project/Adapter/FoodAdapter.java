@@ -25,16 +25,15 @@ public class FoodAdapter extends BaseAdapter {
 
     // 监听器
     public interface OnFoodAdapterListener {
-        void onFoodReduceClick(int position);       // 减少按钮点击事件 在Fragment中实现
+        void onFoodReduceClickListener(int position);       // 减少按钮点击事件 在Fragment中实现
 
-        void onFoodAddClick(int position);          // 增加按钮点击事件 在Fragment中实现
+        void onFoodAddClickListener(int position);          // 增加按钮点击事件 在Fragment中实现
     }
 
     // 此方法用于更新菜品列表数据
     public void updateFoodAdapterFoodBean(List<FoodBean> foodBeanList) {
         this.foodBean.clear();
         this.foodBean.addAll(foodBeanList);
-//        this.foodBean = foodBeanList;
         notifyDataSetChanged(); // 刷新ListView
     }
 
@@ -82,14 +81,14 @@ public class FoodAdapter extends BaseAdapter {
         // 减少按钮点击事件
         holder.foodReduce.setOnClickListener(v -> {
             if (listener != null) {
-                listener.onFoodReduceClick(position);
+                listener.onFoodReduceClickListener(position);
             }
         });
 
         // 增加按钮点击事件
         holder.foodAdd.setOnClickListener(v -> {
             if (listener != null) {
-                listener.onFoodAddClick(position);
+                listener.onFoodAddClickListener(position);
             }
         });
 

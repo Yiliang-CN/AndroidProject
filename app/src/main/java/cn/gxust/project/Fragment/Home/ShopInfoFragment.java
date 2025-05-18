@@ -8,29 +8,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import cn.gxust.project.Bean.ShopBean;
 import cn.gxust.project.R;
 
 public class ShopInfoFragment extends Fragment {
-
-    ShopBean shopBean;
-    TextView shopInfoName, shopInfoPhone, shopInfoAddr;
+    private ShopBean shopBean;
+    private TextView shopInfoName, shopInfoPhone, shopInfoAddr;
 
     public ShopInfoFragment() {
     }
 
-    public static ShopInfoFragment newInstance() {
-        return new ShopInfoFragment();
+    public static ShopInfoFragment newInstance(ShopBean shopBean) {
+        ShopInfoFragment shopInfoFragment = new ShopInfoFragment();
+        Bundle args = new Bundle();
+        args.putSerializable("shopBean", shopBean);
+        shopInfoFragment.setArguments(args);
+        return shopInfoFragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
-            shopBean = (ShopBean) getArguments().getSerializable("shopBean");
-        }
+        // 接收数据
+        recvShopBean();
     }
 
     @Override
@@ -38,14 +41,38 @@ public class ShopInfoFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_shop_info, container, false);
 
+        // 初始化UI控件
+        initUI(rootView);
+
+        // 更新UI信息
+        updateUI();
+
+        return rootView;
+    }
+
+    // 接收ShopActivity中传递过来的店铺数据
+    private void recvShopBean() {
+        // 接收数据
+        if (getArguments() != null) {
+            shopBean = (ShopBean) getArguments().getSerializable("shopBean");
+        }
+        // 检查数据是否完整
+        if (shopBean == null) {
+            Toast.makeText(getActivity(), "获取店铺数据失败", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // 初始化UI控件
+    private void initUI(View rootView) {
         shopInfoName = rootView.findViewById(R.id.shopInfoName);
         shopInfoPhone = rootView.findViewById(R.id.shopInfoPhone);
         shopInfoAddr = rootView.findViewById(R.id.shopInfoAddr);
+    }
 
+    // 更新UI信息
+    private void updateUI() {
         shopInfoName.setText(shopBean.getShopName());
-        shopInfoPhone.setText(shopBean.getShopPhone());
+        shopInfoPhone.setText(String.valueOf(shopBean.getShopPhone()));
         shopInfoAddr.setText(shopBean.getShopAddr());
-
-        return rootView;
     }
 }

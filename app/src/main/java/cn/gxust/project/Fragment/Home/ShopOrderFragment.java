@@ -72,14 +72,6 @@ public class ShopOrderFragment extends Fragment implements ShopOrderFoodFragment
             foodBeanTypeHash.add(foodBean.getFoodType());
         }
         foodBeanTypeList = new ArrayList<>(foodBeanTypeHash);
-
-        // 根据 菜品类别列表 的顺序对 菜品列表 的数据进行重新排序
-        Collections.sort(foodBeanList, (food1, food2) -> {
-            int index1 = foodBeanTypeList.indexOf(food1.getFoodType());
-            int index2 = foodBeanTypeList.indexOf(food2.getFoodType());
-            return Integer.compare(index1, index2);
-        });
-
         // 添加一个"全部"类别到 菜品类别列表 的最前面
         foodBeanTypeList.add(0, "全部");
     }
@@ -89,44 +81,42 @@ public class ShopOrderFragment extends Fragment implements ShopOrderFoodFragment
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_shop_order, container, false);
 
-        shopOrderFoodSales = rootView.findViewById(R.id.shopOrderFoodSales);
-        shopOrderPayBtn = rootView.findViewById(R.id.shopOrderPayBtn);
+        // 初始化UI控件
+        initUI(rootView);
 
-        // 支付按钮的点击事件
-        shopOrderPayBtn.setOnClickListener(v -> {
-            setShopOrderPayBtnOnClickListener();
-        });
+        // 设置子Fragment
+        setChildFragment();
 
+        // 支付按钮点击事件
+        shopOrderPayBtn.setOnClickListener(v -> setShopOrderPayBtnOnClickListener());
+
+        return rootView;
+    }
+
+    // 设置子Fragment
+    private void setChildFragment() {
         // 添加两个 Fragment
-        FragmentManager fragmentManager = getChildFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
 
         // 添加 ShopOrderNavFragment 到 shopOrderNavBlankLayout
+        // 传递数据 菜品类别列表
         if (shopOrderNavFragment == null) {
-            shopOrderNavFragment = new ShopOrderNavFragment();
-            // 传递数据 菜品类别列表
-            Bundle bundleFoodNav = new Bundle();
-            bundleFoodNav.putStringArrayList("foodBeanTypeList", new ArrayList<>(foodBeanTypeList));
-            shopOrderNavFragment.setArguments(bundleFoodNav);
+            shopOrderNavFragment = ShopOrderNavFragment.newInstance(new ArrayList<>(foodBeanTypeList));
         }
         fragmentTransaction.replace(R.id.shopOrderNavBlankLayout, shopOrderNavFragment);
 
         // 添加 ShopOrderFoodFragment 到 shopOrderBlankLayout
+        // 传递数据 菜品列表
         if (shopOrderFoodFragment == null) {
-            shopOrderFoodFragment = new ShopOrderFoodFragment();
-            // 传递数据 菜品列表
-            Bundle bundleFood = new Bundle();
-            bundleFood.putSerializable("foodBeanList", new ArrayList<>(foodBeanList));
-            shopOrderFoodFragment.setArguments(bundleFood);
-
-            // 设置更新购物车的监听器
-            shopOrderFoodFragment.setOnUpdateCartListener(this);
+            shopOrderFoodFragment = ShopOrderFoodFragment.newInstance(new ArrayList<>(foodBeanList));
         }
         fragmentTransaction.replace(R.id.shopOrderBlankLayout, shopOrderFoodFragment);
 
+        // 设置更新购物车的监听器
+        shopOrderFoodFragment.setOnUpdateCartListener(this);
+
         // 提交事务
         fragmentTransaction.commit();
-        return rootView;
     }
 
     // 根据选择的类别更新菜品列表
@@ -148,6 +138,7 @@ public class ShopOrderFragment extends Fragment implements ShopOrderFoodFragment
         }
     }
 
+    // 更新购物车
     @Override
     public void onUpdateCart(List<FoodBean> foodBeanListOnCart) {
 
@@ -182,7 +173,7 @@ public class ShopOrderFragment extends Fragment implements ShopOrderFoodFragment
         // 判断用户是否登录
         if (!isUserLoggedIn) {
             // 提示用户请先登录
-            Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "请先登录!", Toast.LENGTH_SHORT).show();
         } else {
             // 跳转到支付页面
             Intent intent = new Intent(getActivity(), PayActivity.class);
@@ -190,5 +181,11 @@ public class ShopOrderFragment extends Fragment implements ShopOrderFoodFragment
             intent.putExtra("cartContent", cartContent);        // 传递购物车内容
             startActivity(intent);
         }
+    }
+
+    // 初始化UI控件
+    private void initUI(View rootView) {
+        shopOrderFoodSales = rootView.findViewById(R.id.shopOrderFoodSales);
+        shopOrderPayBtn = rootView.findViewById(R.id.shopOrderPayBtn);
     }
 }

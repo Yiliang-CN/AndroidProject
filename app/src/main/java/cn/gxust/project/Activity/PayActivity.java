@@ -27,13 +27,14 @@ public class PayActivity extends AppCompatActivity {
 
     private ImageView payBtnBack;
     private Button payBtn;
-    private OrderBean orderBean;
+    private OrderBean orderBean = new OrderBean(1, 0, null, null, null, null, 0.0, null, null, null, null, 1, null, null);
+
 
     // 订单数据
     private int orderShopID;
     private double orderPrice;
-    private Long orderUserID;
-    private String orderShopName, orderUserName, orderContent, orderTime, orderAddr, orderPhone, orderState;
+    private Long orderUserID, orderPhone;
+    private String orderShopName, orderUserName, orderContent, orderTime, orderAddr, orderState;
 
 
     @Override
@@ -42,75 +43,51 @@ public class PayActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_pay);
 
-        // 初始化控件
-        payBtnBack = findViewById(R.id.payBtnBack);
-        payOrderShopName = findViewById(R.id.payOrderShopName);
-        payOrderUserName = findViewById(R.id.payOrderUserName);
-        payOrderContent = findViewById(R.id.payOrderContent);
-        payOrderPrice = findViewById(R.id.payOrderPrice);
-        payOrderTime = findViewById(R.id.payOrderTime);
-        payOrderAddr = findViewById(R.id.payOrderAddr);
-        payOrderPhone = findViewById(R.id.payOPhone);
-        payOrderState = findViewById(R.id.payOrderState);
-        payBtn = findViewById(R.id.payBtn);
-
-        // 返回按钮
-        payBtnBack.setOnClickListener(view -> finish());
-
-        orderBean = new OrderBean(1, 0, null, null, null, null, 0.0, null, null, null, null, null, null);
-        // 订单数据处理
-        preSetOrderBean(); // 订单数据预处理
-
+        // 初始化UI控件
+        initUI();
+        // 订单数据预处理
+        preSetOrderBean();
         // 更新UI信息
-        payOrderShopName.setText(this.orderShopName);
-        payOrderUserName.setText(this.orderUserName);
-        payOrderContent.setText(this.orderContent);
-        payOrderPrice.setText(String.valueOf(this.orderPrice));
-        payOrderTime.setText(this.orderTime);
-        payOrderState.setText(this.orderState);
+        updateUI();
 
-        // 支付按钮
-        payBtn.setOnClickListener(v -> {
-            setPayBtnOnClickListener();
-        });
+        // 支付按钮点击事件
+        payBtn.setOnClickListener(v -> setPayBtnOnClickListener());
+        // 返回按钮点击事件
+        payBtnBack.setOnClickListener(view -> finish());
     }
 
-    // 设置订单数据 这个数据是提交给服务器的数据 地址和电话数据在提交按钮处设置
+    // 订单数据预处理
     private void preSetOrderBean() {
 
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra("cartPrice")) {
-            this.orderPrice = intent.getDoubleExtra("cartPrice", 0.0);
-            this.orderContent = intent.getStringExtra("cartContent");
+            orderPrice = intent.getDoubleExtra("cartPrice", 0.0);
+            orderContent = intent.getStringExtra("cartContent");
         }
 
         // 店铺ID 店铺名
         SharedPreferences sharedPreferences = getSharedPreferences("shopInfo", MODE_PRIVATE);
-        this.orderShopID = sharedPreferences.getInt("shopID", 0);
-        this.orderShopName = sharedPreferences.getString("shopName", "null");
+        orderShopID = sharedPreferences.getInt("shopID", 0);
+        orderShopName = sharedPreferences.getString("shopName", "null");
 
         // 用户ID 用户名
         sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
-        this.orderUserID = sharedPreferences.getLong("userID", 0);
-        this.orderUserName = sharedPreferences.getString("userName", "null");
+        orderUserID = sharedPreferences.getLong("userID", 0);
+        orderUserName = sharedPreferences.getString("userName", "null");
 
         // 时间
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
         simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+8"));
-        this.orderTime = simpleDateFormat.format(new Date());
+        orderTime = simpleDateFormat.format(new Date());
 
         // 状态
-        this.orderState = "待支付";
+        orderState = "待支付";
     }
 
-    // 支付按钮点击的事件
+    // 支付按钮点击的事件 内含地址和电话数据
     private void setPayBtnOnClickListener() {
-        this.orderAddr = payOrderAddr.getText().toString();
-        this.orderPhone = payOrderPhone.getText().toString();
-
-        // 检查数据是否完整
-        if (this.orderAddr.isEmpty() && this.orderPhone.isEmpty()) {
-            Toast.makeText(this, "请填写完所有信息", Toast.LENGTH_SHORT).show();
+        // 获取订单信息
+        if (!getOrderInfo()) {
             return;
         }
 
@@ -128,17 +105,62 @@ public class PayActivity extends AppCompatActivity {
                 .show();
     }
 
-    // 保存订单信息
+    // 获取订单信息
+    private boolean getOrderInfo() {
+        orderAddr = payOrderAddr.getText().toString();
+        String orderPhoneStr = payOrderPhone.getText().toString();
+
+        // 检查数据是否完整
+        if (orderAddr.isEmpty() && orderPhoneStr.isEmpty()) {
+            Toast.makeText(this, "请填写完订单信息", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        try {
+            orderPhone = Long.valueOf(orderPhoneStr);
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "请输入正确的电话号码", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
+    }
+
+    // 保存订单信息 数据用于提交服务器
     private void setOrderBean() {
-        this.orderBean.setOrderShopID(this.orderShopID);
-        this.orderBean.setOrderShopName(this.orderShopName);
-        this.orderBean.setOrderUserID(this.orderUserID);
-        this.orderBean.setOrderUserName(this.orderUserName);
-        this.orderBean.setOrderContent(this.orderContent);
-        this.orderBean.setOrderPrice(this.orderPrice);
-        this.orderBean.setOrderTime(this.orderTime);
-        this.orderBean.setOrderAddr(this.orderAddr);
-        this.orderBean.setOrderPhone(Long.valueOf(this.orderPhone));
-        this.orderBean.setOrderState("待支付");
+        orderBean.setOrderShopID(orderShopID);
+        orderBean.setOrderShopName(orderShopName);
+        orderBean.setOrderUserID(orderUserID);
+        orderBean.setOrderUserName(orderUserName);
+        orderBean.setOrderContent(orderContent);
+        orderBean.setOrderPrice(orderPrice);
+        orderBean.setOrderTime(orderTime);
+        orderBean.setOrderAddr(orderAddr);
+        orderBean.setOrderPhone(Long.valueOf(orderPhone));
+        orderBean.setOrderState("待支付");
+    }
+
+    // 初始化UI控件
+    private void initUI() {
+        payBtnBack = findViewById(R.id.payBtnBack);
+        payOrderShopName = findViewById(R.id.payOrderShopName);
+        payOrderUserName = findViewById(R.id.payOrderUserName);
+        payOrderContent = findViewById(R.id.payOrderContent);
+        payOrderPrice = findViewById(R.id.payOrderPrice);
+        payOrderTime = findViewById(R.id.payOrderTime);
+        payOrderAddr = findViewById(R.id.payOrderAddr);
+        payOrderPhone = findViewById(R.id.payOPhone);
+        payOrderState = findViewById(R.id.payOrderState);
+        payBtn = findViewById(R.id.payBtn);
+    }
+
+    // 更新UI信息
+    private void updateUI() {
+        payOrderShopName.setText(orderShopName);
+        payOrderUserName.setText(orderUserName);
+        payOrderContent.setText(orderContent);
+        payOrderPrice.setText(String.valueOf(orderPrice));
+        payOrderTime.setText(orderTime);
+        payOrderState.setText(orderState);
     }
 }

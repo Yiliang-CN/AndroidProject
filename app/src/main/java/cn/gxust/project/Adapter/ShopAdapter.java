@@ -61,8 +61,8 @@ public class ShopAdapter extends BaseAdapter {
 
 //        holder.shopImage.setImageResource(shopBean.get(position).getShopImg());
         holder.shopName.setText(shopBean.get(position).getShopName());
-        holder.shopSales.setText(shopBean.get(position).getShopSales());
-        holder.shopPrice.setText(shopBean.get(position).getShopPrice());
+        holder.shopSales.setText(String.valueOf(shopBean.get(position).getShopSales()));
+        holder.shopPrice.setText(String.valueOf(shopBean.get(position).getShopPrice()));
 
         return convertView;
     }

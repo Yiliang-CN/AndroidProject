@@ -47,7 +47,7 @@
             android:src="@drawable/register" />
 
         <EditText
-            android:id="@+id/registerUserName"
+            android:id="@+id/registerUserPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"

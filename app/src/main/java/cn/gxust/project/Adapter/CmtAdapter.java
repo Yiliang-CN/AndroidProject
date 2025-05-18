@@ -58,7 +58,7 @@ public class CmtAdapter extends BaseAdapter {
 
 //        holder.cmtUserImage.setImageResource(cmtBean.get(position).getCmtUserImage());
         holder.cmtUserName.setText(cmtBean.get(position).getCmtUserName());
-        holder.cmtScore.setText(cmtBean.get(position).getCmtScore());
+        holder.cmtScore.setText(String.valueOf(cmtBean.get(position).getCmtScore()));
         holder.cmtTime.setText(cmtBean.get(position).getCmtTime());
         holder.cmtContent.setText(cmtBean.get(position).getCmtContent());
 

@@ -24,9 +24,9 @@ public class ShopCmtFragment extends Fragment {
     private CmtAdapter cmtAdapter;
 
     // 模拟数据
-    int[] cmtID = {1, 2, 3, 4, 5, 6, 7, 8};
+    Long[] cmtID = {1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L};
     String[] cmtUserName = {"张三", "李四", "王五", "赵六", "孙七", "周八", "吴九", "郑十"};
-    String[] cmtScore = {"5", "4", "3", "2", "1", "5", "4", "3"};
+    int[] cmtScore = {5, 4, 3, 2, 1, 5, 4, 3};
     String[] cmtTime = {"2018-01-01", "2018-01-02", "2018-01-03", "2018-01-04", "2018-01-05", "2018-01-06", "2018-01-07", "2018-01-08"};
     String[] cmtContent = {"这个店真不错", "这个店真不错", "这个店真不错", "这个店真不错", "这个店真不错", "这个店真不错", "这个店真不错", "这个店真不错"};
 
@@ -42,10 +42,8 @@ public class ShopCmtFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         cmtBeanList = new ArrayList<>();
-        cmtAdapter = new CmtAdapter(cmtBeanList, getContext());
-
         for (int i = 0; i < cmtID.length; i++) {
-            CmtBean cmtBean = new CmtBean(cmtID[i], null, cmtUserName[i], 0, cmtScore[i], cmtTime[i], cmtContent[i], null);
+            CmtBean cmtBean = new CmtBean(cmtID[i], 0L, cmtUserName[i], 0, cmtScore[i], cmtTime[i], cmtContent[i], null);
             cmtBeanList.add(cmtBean);
         }
     }
@@ -53,10 +51,13 @@ public class ShopCmtFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // 加载根View
         View rootView = inflater.inflate(R.layout.fragment_shop_cmt, container, false);
 
+        // 初始化ListView
         cmtListView = rootView.findViewById(R.id.cmtListView);
 
+        // 创建并设置Adapter
         cmtAdapter = new CmtAdapter(cmtBeanList, getContext());
         cmtListView.setAdapter(cmtAdapter);
 

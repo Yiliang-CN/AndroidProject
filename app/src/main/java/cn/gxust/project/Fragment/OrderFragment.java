@@ -1,6 +1,9 @@
 package cn.gxust.project.Fragment;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +20,6 @@ import java.util.List;
 import cn.gxust.project.Activity.OrderActivity;
 import cn.gxust.project.Adapter.OrderAdapter;
 import cn.gxust.project.Bean.OrderBean;
-import cn.gxust.project.Bean.ShopBean;
 import cn.gxust.project.R;
 
 public class OrderFragment extends Fragment implements OrderAdapter.OnOrderAdapterListener {
@@ -46,9 +49,14 @@ public class OrderFragment extends Fragment implements OrderAdapter.OnOrderAdapt
         super.onCreate(savedInstanceState);
 
         orderBeanList = new ArrayList<>();
-        for (int i = 0; i < orderID.length; i++) {
-            OrderBean orderBean = new OrderBean(orderID[i], 1, orderShopName[i], 1L, "用户1", orderContent[i],  orderPrice[i], orderTime[i], "上海", 12345678910L, orderState[i], "无", "无");
-            orderBeanList.add(orderBean);
+
+        if (isUserLoggedIn()) {
+            for (int i = 0; i < orderID.length; i++) {
+                OrderBean orderBean = new OrderBean(orderID[i], 1, orderShopName[i], 1L, "用户1", orderContent[i], orderPrice[i], orderTime[i], "上海", 12345678910L, orderState[i], 1, "无", "无");
+                orderBeanList.add(orderBean);
+            }
+        } else {
+            Toast.makeText(getActivity(), "请先登录再查看历史订单", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -71,10 +79,15 @@ public class OrderFragment extends Fragment implements OrderAdapter.OnOrderAdapt
     // 订单项中点击店名即可打开订单详情页
     // 为什么要这样弄 因为订单项的布局中包含有 按钮 按钮会覆盖掉 项 本身的点击事件 所以只能单独选择店名的作为详细页面的入口
     @Override
-    public void onOrderShopNameClick(OrderBean orderBean) {
+    public void setOrderShopNameOnClickListener(OrderBean orderBean) {
         Intent intent = new Intent(getContext(), OrderActivity.class);
         intent.putExtra("orderBean", orderBean);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT); // 设置启动标志，使得Activity在栈顶
         startActivity(intent);
+    }
+
+    private boolean isUserLoggedIn() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("userLoginStatus", MODE_PRIVATE);
+        return sharedPreferences.getBoolean("isUserLoggedIn", false);   // 默认为未登录
     }
 }

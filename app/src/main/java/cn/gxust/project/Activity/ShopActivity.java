@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +26,7 @@ public class ShopActivity extends AppCompatActivity {
 
     private ShopBean shopBean;
     private ImageView shopBtnBack;
-    private TextView shopName, shopOrder, shopCmt, shopInfo;
+    private TextView shopName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,57 +34,96 @@ public class ShopActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_shop);
 
-        shopOrderFragment = new ShopOrderFragment();
-        shopCmtFragment = new ShopCmtFragment();
-        shopInfoFragment = new ShopInfoFragment();
-
-        shopBtnBack = findViewById(R.id.shopBtnBack);
-        shopName = findViewById(R.id.shopName);
-        shopOrder = findViewById(R.id.shopOrder);
-        shopCmt = findViewById(R.id.shopCmt);
-        shopInfo = findViewById(R.id.shopInfo);
-
-        shopBtnBack.setOnClickListener(view -> finish());   // 返回按钮 返回到首页
-
-        Intent intent = getIntent();
-        if (intent != null && intent.hasExtra("shopBean")) {
-            shopBean = (ShopBean) intent.getSerializableExtra("shopBean");
-            if (shopBean != null) {
-                shopName.setText(shopBean.getShopName());  // 设置店名
-            }
-
-            SharedPreferences sharedPreferences = getSharedPreferences("shopInfo", MODE_PRIVATE);
-            sharedPreferences.edit().putInt("shopID", shopBean.getShopID()).apply();
-            sharedPreferences.edit().putString("shopName", shopBean.getShopName()).apply();
-            sharedPreferences.edit().putString("shopSales", shopBean.getShopSales()).apply();
-            sharedPreferences.edit().putString("shopPrice", shopBean.getShopPrice()).apply();
-            sharedPreferences.edit().putString("shopPhone", shopBean.getShopPhone()).apply();
-            sharedPreferences.edit().putString("shopAddr", shopBean.getShopAddr()).apply();
-        }
+        // 初始化UI控件
+        initUI();
 
         // 设置默认页面
         if (savedInstanceState == null) {
+            if (shopOrderFragment == null) {
+                shopOrderFragment = ShopOrderFragment.newInstance();
+            }
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.shopBlankLayout, shopOrderFragment)
                     .commit();
         }
+
+        // 接收HomeFragment传递过来的店铺数据
+        recvShopBean();
+
+        // 更新UI信息
+        updateUI();
+
+        // 将店铺数据写入本地存储
+        recordShopInfo();
+
+        // 返回按钮的点击事件
+        shopBtnBack.setOnClickListener(view -> finish());
     }
 
+    // 接收HomeFragment传递过来的店铺数据
+    private void recvShopBean() {
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("shopBean")) {
+            shopBean = (ShopBean) intent.getSerializableExtra("shopBean");
+        }
+        // 检测数据是否存在 不存在则退出
+        if (shopBean == null) {
+            Toast.makeText(this, "获取店铺数据失败", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+    }
+
+    // 将店铺信息写入本地存储
+    private void recordShopInfo() {
+        if (shopBean != null) {
+            SharedPreferences sharedPreferences = getSharedPreferences("shopInfo", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("shopID", shopBean.getShopID());
+            editor.putString("shopName", shopBean.getShopName());
+            editor.putInt("shopSales", shopBean.getShopSales());
+            editor.putString("shopPrice", String.valueOf(shopBean.getShopPrice()));
+            editor.putLong("shopPhone", shopBean.getShopPhone());
+            editor.putString("shopAddr", shopBean.getShopAddr());
+            editor.apply();
+        }
+    }
+
+    // 设置页面切换
     public void switchShopPage(View view) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("shopBean", shopBean);
-
         if (view.getId() == R.id.shopOrder) {
+            if (shopOrderFragment == null) {
+                shopOrderFragment = ShopOrderFragment.newInstance();
+            }
             fragmentTransaction.replace(R.id.shopBlankLayout, shopOrderFragment);
+
         } else if (view.getId() == R.id.shopCmt) {
+            if (shopCmtFragment == null) {
+                shopCmtFragment = ShopCmtFragment.newInstance();
+            }
             fragmentTransaction.replace(R.id.shopBlankLayout, shopCmtFragment);
+
         } else if (view.getId() == R.id.shopInfo) {
-            shopInfoFragment.setArguments(bundle);
+            if (shopInfoFragment == null) {
+                // 创建店铺信息页面 并将店铺信息shopBean传入
+                shopInfoFragment = ShopInfoFragment.newInstance(shopBean);
+            }
             fragmentTransaction.replace(R.id.shopBlankLayout, shopInfoFragment);
         }
 
         fragmentTransaction.commit();
+    }
+
+    // 初始化UI控件
+    private void initUI() {
+        shopBtnBack = findViewById(R.id.shopBtnBack);
+        shopName = findViewById(R.id.shopName);
+    }
+
+    private void updateUI() {
+        if (shopBean != null) {
+            shopName.setText(shopBean.getShopName());
+        }
     }
 }

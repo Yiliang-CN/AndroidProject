@@ -1,7 +1,6 @@
 package cn.gxust.project.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -9,7 +8,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import cn.gxust.project.Activity.OrderActivity;
 import cn.gxust.project.Bean.OrderBean;
 import cn.gxust.project.R;
 
@@ -18,7 +16,6 @@ public class OrderAdapter extends BaseAdapter {
     private Context context;
     private OnOrderAdapterListener listener;
 
-
     public OrderAdapter(List<OrderBean> orderBean, Context context, OnOrderAdapterListener listener) {
         this.orderBean = orderBean;
         this.context = context;
@@ -26,7 +23,7 @@ public class OrderAdapter extends BaseAdapter {
     }
 
     public interface OnOrderAdapterListener {
-        void onOrderShopNameClick(OrderBean orderBean);
+        void setOrderShopNameOnClickListener(OrderBean orderBean);
     }
 
     @Override
@@ -70,9 +67,10 @@ public class OrderAdapter extends BaseAdapter {
         holder.orderTime.setText(orderBean.get(position).getOrderTime());
         holder.orderState.setText(orderBean.get(position).getOrderState());
 
+        // 设置点击事件
         holder.orderShopName.setOnClickListener(v -> {
             if (listener != null) {
-                listener.onOrderShopNameClick(orderBean.get(position));
+                listener.setOrderShopNameOnClickListener(orderBean.get(position));
             }
         });
 

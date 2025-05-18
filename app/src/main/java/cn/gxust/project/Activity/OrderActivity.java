@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +30,33 @@ public class OrderActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_order);
 
+        // 初始化UI控件
+        initUI();
+
+        // 接收订单信息
+        recvOrderBean();
+
+        // 更新UI控件
+        updateUI();
+
+        // 返回按钮点击事件
+        orderBtnBack.setOnClickListener(v -> finish());
+    }
+
+    private void recvOrderBean() {
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("orderBean")) {
+            orderBean = (OrderBean) intent.getSerializableExtra("orderBean");
+        }
+        // 检测数据是否存在 不存在则退出
+        if (orderBean == null) {
+            Toast.makeText(this, "获取订单数据失败", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+    }
+
+    // 初始化UI控件
+    private void initUI() {
         orderBtnBack = findViewById(R.id.orderBtnBack);
         orderID = findViewById(R.id.orderID);
         orderShopName = findViewById(R.id.orderShopName);
@@ -39,24 +67,19 @@ public class OrderActivity extends AppCompatActivity {
         orderAddr = findViewById(R.id.orderAddr);
         orderPhone = findViewById(R.id.orderPhone);
         orderState = findViewById(R.id.orderState);
+    }
 
-        orderBtnBack.setOnClickListener(v -> finish());
-
-        Intent intent = getIntent();
-        if (intent != null && intent.hasExtra("orderBean")) {
-            orderBean = (OrderBean) intent.getSerializableExtra("orderBean");
-            if (orderBean != null) {
-                orderID.setText(String.valueOf(orderBean.getOrderID()));
-                orderShopName.setText(orderBean.getOrderShopName());
-                orderUserName.setText(orderBean.getOrderUserName());
-                orderContent.setText(orderBean.getOrderContent());
-                orderPrice.setText(String.valueOf(orderBean.getOrderPrice()));
-                orderTime.setText(orderBean.getOrderTime());
-                orderAddr.setText(orderBean.getOrderAddr());
-                orderPhone.setText(String.valueOf(orderBean.getOrderPhone()));
-                orderState.setText(orderBean.getOrderState());
-            }
+    private void updateUI() {
+        if (orderBean != null) {
+            orderID.setText(String.valueOf(orderBean.getOrderID()));
+            orderShopName.setText(orderBean.getOrderShopName());
+            orderUserName.setText(orderBean.getOrderUserName());
+            orderContent.setText(orderBean.getOrderContent());
+            orderPrice.setText(String.valueOf(orderBean.getOrderPrice()));
+            orderTime.setText(orderBean.getOrderTime());
+            orderAddr.setText(orderBean.getOrderAddr());
+            orderPhone.setText(String.valueOf(orderBean.getOrderPhone()));
+            orderState.setText(orderBean.getOrderState());
         }
-
     }
 }

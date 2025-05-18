@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,6 +30,7 @@ public class ShopOrderFoodFragment extends Fragment implements FoodAdapter.OnFoo
 
     // 更新购物车监听器
     public interface OnUpdateCartListener {
+        // 下面的方法是 谁监听 谁实现
         void onUpdateCart(List<FoodBean> foodBeanList);
     }
 
@@ -40,17 +42,20 @@ public class ShopOrderFoodFragment extends Fragment implements FoodAdapter.OnFoo
     public ShopOrderFoodFragment() {
     }
 
-    public static ShopOrderFoodFragment newInstance() {
-        return new ShopOrderFoodFragment();
+    public static ShopOrderFoodFragment newInstance(List<FoodBean> foodBeanList) {
+        ShopOrderFoodFragment shopOrderFoodFragment = new ShopOrderFoodFragment();
+        Bundle args = new Bundle();
+        args.putSerializable("foodBeanList", (ArrayList<FoodBean>) foodBeanList);
+        shopOrderFoodFragment.setArguments(args);
+        return shopOrderFoodFragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
-            foodBeanList = (List<FoodBean>) getArguments().getSerializable("foodBeanList");
-        }
+        // 接收数据
+        recvFoodBeanList();
 
         foodBeanListOnCart = new ArrayList<>();
     }
@@ -75,7 +80,29 @@ public class ShopOrderFoodFragment extends Fragment implements FoodAdapter.OnFoo
         foodAdapter.updateFoodAdapterFoodBean(foodBeanList);
     }
 
-    // 添加菜品信息到购物车
+    // 菜品项中 减少按钮 的点击事件
+    @Override
+    public void onFoodReduceClickListener(int position) {
+        FoodBean foodBean = foodBeanList.get(position);
+        if (foodBean.getFoodNum() > 0) {
+            foodBean.setFoodNum(foodBean.getFoodNum() - 1);
+            updateFoodBeanListToCart(foodBean);     // 更新购物车列表
+            foodAdapter.notifyDataSetChanged();     // 通知适配器进行数据更新
+        }
+    }
+
+    // 菜品项中 增加按钮 的点击事件
+    @Override
+    public void onFoodAddClickListener(int position) {
+        FoodBean foodBean = foodBeanList.get(position);
+        if (foodBean.getFoodNum() < 9) {
+            foodBean.setFoodNum(foodBean.getFoodNum() + 1);
+            updateFoodBeanListToCart(foodBean);     // 更新购物车列表
+            foodAdapter.notifyDataSetChanged();     // 通知适配器进行数据更新
+        }
+    }
+
+    // 更新要传到购物车中的数据
     private void updateFoodBeanListToCart(FoodBean foodBean) {
         // 使用迭代器
         boolean isUpdate = false;
@@ -109,27 +136,15 @@ public class ShopOrderFoodFragment extends Fragment implements FoodAdapter.OnFoo
         }
     }
 
-    // 菜品项中 减少按钮 的点击事件
-    @Override
-    public void onFoodReduceClick(int position) {
-        FoodBean foodBean = foodBeanList.get(position);
-        if (foodBean.getFoodNum() > 0) {
-            foodBean.setFoodNum(foodBean.getFoodNum() - 1);
-            updateFoodBeanListToCart(foodBean);     // 更新购物车列表
-            foodAdapter.notifyDataSetChanged();     // 通知适配器进行数据更新
+    // 接收shopOrderFragment传来的数据
+    private void recvFoodBeanList() {
+        // 接收数据
+        if (getArguments() != null) {
+            foodBeanList = (List<FoodBean>) getArguments().getSerializable("foodBeanList");
+        }
+        // 检查数据是否完整
+        if (foodBeanList == null) {
+            Toast.makeText(getActivity(), "获取数据失败", Toast.LENGTH_SHORT).show();
         }
     }
-
-    // 菜品项中 增加按钮 的点击事件
-    @Override
-    public void onFoodAddClick(int position) {
-        FoodBean foodBean = foodBeanList.get(position);
-        if (foodBean.getFoodNum() < 9) {
-            foodBean.setFoodNum(foodBean.getFoodNum() + 1);
-            updateFoodBeanListToCart(foodBean);     // 更新购物车列表
-            foodAdapter.notifyDataSetChanged();     // 通知适配器进行数据更新
-        }
-    }
-
-
 }
