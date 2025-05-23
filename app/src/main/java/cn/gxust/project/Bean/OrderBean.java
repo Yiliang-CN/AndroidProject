@@ -14,9 +14,6 @@ public class OrderBean implements Serializable {
     private String orderAddr;       // 订单地址             这是记录用户的订单地址
     private Long orderPhone;        // 订单电话             这是记录用户的订单电话
     private String orderState;      // 订单状态             这是记录用户的订单状态
-    private int orderScore;         // 评分                这是记录用户下单后的订单评分
-    private String orderComment;    // 订单评论             这是记录用户下单后的订单评论
-    private String orderCommentTime;// 评论时间             这是记录用户下单后的评论时间
 
     public OrderBean(int orderID, int orderShopID, String orderShopName, Long orderUserID, String orderUserName, String orderContent, double orderPrice, String orderTime, String orderAddr, Long orderPhone, String orderState, int orderScore, String orderComment, String orderCommentTime) {
         this.orderID = orderID;
@@ -30,9 +27,6 @@ public class OrderBean implements Serializable {
         this.orderAddr = orderAddr;
         this.orderPhone = orderPhone;
         this.orderState = orderState;
-        this.orderScore = orderScore;
-        this.orderComment = orderComment;
-        this.orderCommentTime = orderCommentTime;
     }
 
 
@@ -122,29 +116,5 @@ public class OrderBean implements Serializable {
 
     public void setOrderState(String orderState) {
         this.orderState = orderState;
-    }
-
-    public int getOrderScore() {
-        return orderScore;
-    }
-
-    public void setOrderScore(int orderScore) {
-        this.orderScore = orderScore;
-    }
-
-    public String getOrderComment() {
-        return orderComment;
-    }
-
-    public void setOrderComment(String orderComment) {
-        this.orderComment = orderComment;
-    }
-
-    public String getOrderCommentTime() {
-        return orderCommentTime;
-    }
-
-    public void setOrderCommentTime(String orderCommentTime) {
-        this.orderCommentTime = orderCommentTime;
     }
 }

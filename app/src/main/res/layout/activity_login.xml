@@ -46,12 +46,14 @@
             android:src="@drawable/user" />
 
         <EditText
-            android:id="@+id/loginUserID"
+            android:id="@+id/loginUserPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center"
-            android:hint="输入用户名"
+            android:hint="输入手机号"
+            android:inputType="number"
+            android:maxLength="11"
             android:textSize="24sp" />
 
         <EditText
@@ -61,6 +63,8 @@
             android:layout_marginTop="16dp"
             android:gravity="center"
             android:hint="输入密码"
+            android:inputType="textPassword"
+            android:maxLength="20"
             android:textSize="24sp" />
 
         <Button

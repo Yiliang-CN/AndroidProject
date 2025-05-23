@@ -45,7 +45,7 @@ public class HomeFragment extends Fragment {
 
         shopBeanList = new ArrayList<>();
         for (int i = 0; i < shopID.length; i++) {
-            ShopBean shopBean = new ShopBean(shopID[i], shopName[i], shopSales[i], shopPrice[i], shopPhone[i], shopAddr[i], "http://img.zcool.cn/community/013f5e594b0f0fa801206b0e0f0c7a2.jpg@1280w_1l_2o_100sh.jpg");
+            ShopBean shopBean = new ShopBean(shopID[i], shopName[i], shopSales[i], shopPrice[i], shopAddr[i], shopPhone[i], null);
             shopBeanList.add(shopBean);
         }
     }

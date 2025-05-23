@@ -20,7 +20,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/userInfoUserIDText"
+            android:id="@+id/userInfoUserIdText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
@@ -30,12 +30,12 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/userInfoUserID"
+            android:id="@+id/userInfoUserId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_toEndOf="@+id/userInfoUserIDText"
+            android:layout_toEndOf="@+id/userInfoUserIdText"
             android:gravity="center_vertical"
             android:text="用户ID"
             android:textSize="24sp" />
@@ -44,7 +44,7 @@
             android:id="@+id/userInfoUserNameText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/userInfoUserIDText"
+            android:layout_below="@+id/userInfoUserIdText"
             android:layout_marginStart="48dp"
             android:layout_marginTop="16dp"
             android:gravity="center_vertical"
@@ -55,10 +55,10 @@
             android:id="@+id/userInfoUserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/userInfoUserIDText"
+            android:layout_below="@+id/userInfoUserIdText"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_toEndOf="@+id/userInfoUserIDText"
+            android:layout_toEndOf="@+id/userInfoUserIdText"
             android:gravity="center_vertical"
             android:text="用户名"
             android:textSize="24sp" />
@@ -81,7 +81,7 @@
             android:layout_below="@+id/userInfoUserNameText"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_toEndOf="@+id/userInfoUserIDText"
+            android:layout_toEndOf="@+id/userInfoUserIdText"
             android:gravity="center_vertical"
             android:text="性别"
             android:textSize="24sp" />
@@ -104,7 +104,7 @@
             android:layout_below="@+id/userInfoUserSexText"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_toEndOf="@+id/userInfoUserIDText"
+            android:layout_toEndOf="@+id/userInfoUserIdText"
             android:gravity="center_vertical"
             android:text="生日"
             android:textSize="24sp" />
@@ -127,7 +127,7 @@
             android:layout_below="@+id/userInfoUserBirthdayText"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_toEndOf="@+id/userInfoUserIDText"
+            android:layout_toEndOf="@+id/userInfoUserIdText"
             android:gravity="center_vertical"
             android:text="手机号"
             android:textSize="24sp" />

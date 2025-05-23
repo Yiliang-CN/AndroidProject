@@ -7,18 +7,18 @@ public class ShopBean implements Serializable {
     private String shopName;        // 商店名称
     private int shopSales;          // 商店销量
     private double shopPrice;       // 商店价格
-    private Long shopPhone;         // 商家电话
     private String shopAddr;        // 商店地址
-    private String shopImg;         // 商店图片
+    private Long shopPhone;         // 商家电话
+    private String shopImage;         // 商店图片
 
-    public ShopBean(int shopId, String shopName, int shopSales, double shopPrice, Long shopPhone, String shopAddress, String shopImg) {
-        this.shopID = shopId;
+    public ShopBean(int shopID, String shopName, int shopSales, double shopPrice, String shopAddr, Long shopPhone, String shopImage) {
+        this.shopID = shopID;
         this.shopName = shopName;
         this.shopSales = shopSales;
         this.shopPrice = shopPrice;
+        this.shopAddr = shopAddr;
         this.shopPhone = shopPhone;
-        this.shopAddr = shopAddress;
-        this.shopImg = shopImg;
+        this.shopImage = shopImage;
     }
 
     public int getShopID() {
@@ -69,12 +69,12 @@ public class ShopBean implements Serializable {
         this.shopAddr = shopAddr;
     }
 
-    public String getShopImg() {
-        return shopImg;
+    public String getShopImage() {
+        return shopImage;
     }
 
-    public void setShopImg(String shopImg) {
-        this.shopImg = shopImg;
+    public void setShopImage(String shopImage) {
+        this.shopImage = shopImage;
     }
 
 }

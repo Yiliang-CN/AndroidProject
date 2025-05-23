@@ -1,7 +1,7 @@
 package cn.gxust.project.Bean;
 
 public class CmtBean {
-    private Long cmtID;              // 评论ID
+    private Long cmtID;             // 评论ID
     private Long cmtUserID;         // 评论用户ID
     private String cmtUserName;     // 评论用户名
     private int cmtShopID;          // 评论店铺ID

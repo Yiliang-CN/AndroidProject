@@ -62,7 +62,7 @@ public class ShopOrderFragment extends Fragment implements ShopOrderFoodFragment
         foodBeanList = new ArrayList<>();
 
         for (int i = 0; i < foodID.length; i++) {
-            FoodBean foodBean = new FoodBean(foodID[i], 0, foodName[i], foodType[i], foodSales[i], foodPrice[i], foodNum[i], null);
+            FoodBean foodBean = new FoodBean(foodID[i], foodName[i], 0, foodType[i], foodSales[i], foodPrice[i], foodNum[i], null);
             foodBeanList.add(foodBean);
         }
 
