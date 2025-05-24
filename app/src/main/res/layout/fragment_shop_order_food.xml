@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragment.Home.ShopOrderFoodFragment">
+    tools:context=".fragment.home.ShopOrderFoodFragment">
 
     <ListView
         android:id="@+id/foodListView"

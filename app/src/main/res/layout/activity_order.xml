@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:weightSum="11"
-    tools:context=".Activity.OrderActivity">
+    tools:context=".activity.OrderActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
