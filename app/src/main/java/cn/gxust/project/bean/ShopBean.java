@@ -5,8 +5,8 @@ import java.io.Serializable;
 public class ShopBean implements Serializable {
     private int id;             // 商店id
     private String name;        // 商店名称
+    private double score;       // 商店评分
     private int sales;          // 商店销量
-    private double price;       // 商店价格
     private String addr;        // 商店地址
     private String phone;         // 商家电话
     private String image;         // 商店图片
@@ -30,20 +30,20 @@ public class ShopBean implements Serializable {
         this.name = name;
     }
 
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
+    }
+
     public int getSales() {
         return sales;
     }
 
     public void setSales(int sales) {
         this.sales = sales;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public String getPhone() {

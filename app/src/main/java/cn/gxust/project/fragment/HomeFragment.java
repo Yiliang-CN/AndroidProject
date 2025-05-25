@@ -31,9 +31,6 @@ import cn.gxust.project.R;
 
 public class HomeFragment extends Fragment {
 
-    // 定义常量
-    private static final String URL = "http://10.0.2.2:8080/shops";
-
     private ListView shopListView;
     private List<ShopBean> shopBeans;
     private ShopAdapter shopAdapter;
@@ -86,7 +83,7 @@ public class HomeFragment extends Fragment {
 
     // 请求数据
     private void getHttpData() {
-        OkHttpUtils.getInstance().doGet(URL, new OkHttpUtils.OkHttpCallback() {
+        OkHttpUtils.getInstance().doGet(getString(R.string.base_url_shops), new OkHttpUtils.OkHttpCallback() {
             @Override
             public void onFailure(IOException e) {
                 Toast.makeText(requireContext(), "网络请求失败", Toast.LENGTH_SHORT).show();
@@ -123,8 +120,8 @@ public class HomeFragment extends Fragment {
                 ShopBean shopBean = new ShopBean();
                 shopBean.setId(shopObject.getInt("id"));
                 shopBean.setName(shopObject.getString("name"));
+                shopBean.setScore(shopObject.getDouble("score"));
                 shopBean.setSales(shopObject.getInt("sales"));
-                shopBean.setPrice(shopObject.getDouble("price"));
                 shopBean.setAddr(shopObject.getString("addr"));
                 shopBean.setPhone(shopObject.getString("phone"));
                 if (!shopObject.isNull("image")) {

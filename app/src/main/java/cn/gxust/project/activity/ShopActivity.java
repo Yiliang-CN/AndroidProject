@@ -80,8 +80,8 @@ public class ShopActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putInt("id", shopBean.getId())
                     .putString("name", shopBean.getName())
+                    .putString("score",String.valueOf(shopBean.getScore()))
                     .putInt("sales", shopBean.getSales())
-                    .putString("price", String.valueOf(shopBean.getPrice()))
                     .putString("addr", shopBean.getPhone())
                     .putString("phone", shopBean.getAddr())
                     .apply();

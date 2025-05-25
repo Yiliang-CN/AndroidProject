@@ -43,7 +43,7 @@
             android:paddingTop="32dp">
 
             <TextView
-                android:id="@+id/orderIDText"
+                android:id="@+id/orderIdText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -53,12 +53,13 @@
                 android:textSize="24sp" />
 
             <TextView
-                android:id="@+id/orderID"
+                android:id="@+id/orderId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_toEndOf="@+id/orderIDText"
+                android:layout_marginEnd="32dp"
+                android:layout_toEndOf="@+id/orderIdText"
                 android:gravity="center_vertical"
                 android:text="订单编号"
                 android:textSize="24sp" />
@@ -67,7 +68,7 @@
                 android:id="@+id/orderShopNameText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/orderIDText"
+                android:layout_below="@+id/orderIdText"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:gravity="center_vertical"
@@ -78,9 +79,10 @@
                 android:id="@+id/orderShopName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/orderIDText"
+                android:layout_below="@+id/orderIdText"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
                 android:layout_toEndOf="@+id/orderShopNameText"
                 android:gravity="center_vertical"
                 android:text="商家名称"
@@ -104,6 +106,7 @@
                 android:layout_below="@+id/orderShopNameText"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
                 android:layout_toEndOf="@+id/orderUserNameText"
                 android:gravity="center_vertical"
                 android:text="用户名称"
@@ -123,13 +126,13 @@
             <TextView
                 android:id="@+id/orderContent"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/orderUserNameText"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:layout_toEndOf="@+id/orderContentText"
-                android:maxLines="3"
+                android:minLines="2"
                 android:text="订单内容"
                 android:textSize="24sp" />
 
@@ -137,7 +140,7 @@
                 android:id="@+id/orderPriceText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/orderContentText"
+                android:layout_below="@+id/orderContent"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:gravity="center_vertical"
@@ -148,9 +151,10 @@
                 android:id="@+id/orderPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/orderContentText"
+                android:layout_below="@+id/orderContent"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
                 android:layout_toEndOf="@+id/orderPriceText"
                 android:gravity="center_vertical"
                 android:text="订单价格"
@@ -197,6 +201,7 @@
                 android:layout_below="@+id/orderTimeText"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
                 android:layout_toEndOf="@+id/orderAddrText"
                 android:gravity="center_vertical"
                 android:text="订单地址"
@@ -206,7 +211,7 @@
                 android:id="@+id/orderPhoneText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/orderAddrText"
+                android:layout_below="@+id/orderAddr"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:gravity="center_vertical"
@@ -217,9 +222,10 @@
                 android:id="@+id/orderPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/orderAddrText"
+                android:layout_below="@+id/orderAddr"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
                 android:layout_toEndOf="@+id/orderPhoneText"
                 android:gravity="center_vertical"
                 android:text="订单电话"
@@ -243,10 +249,84 @@
                 android:layout_below="@+id/orderPhoneText"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
                 android:layout_toEndOf="@+id/orderStateText"
                 android:gravity="center_vertical"
                 android:text="订单状态"
                 android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/orderScoreText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/orderStateText"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:text="评分"
+                android:textSize="24sp"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/orderScore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/orderStateText"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toEndOf="@+id/orderStateText"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textSize="24sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/orderCmtText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/orderScoreText"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:text="评论"
+                android:textSize="24sp"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/orderCmt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/orderScoreText"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="80dp"
+                android:layout_toEndOf="@+id/orderStateText"
+                android:background="@null"
+                android:gravity="top|left"
+                android:maxLength="100"
+                android:minLines="3"
+                android:textSize="24sp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/orderCmtBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/orderCmt"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="80dp"
+                android:layout_marginEnd="80dp"
+                android:text="评论"
+                android:textSize="24sp"
+                android:visibility="gone" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_below="@id/orderCmtBtn"
+                android:layout_alignParentBottom="true" />
 
         </RelativeLayout>
 

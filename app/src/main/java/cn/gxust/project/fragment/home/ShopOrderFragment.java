@@ -38,9 +38,6 @@ import cn.gxust.project.R;
 
 public class ShopOrderFragment extends Fragment implements ShopOrderFoodFragment.OnUpdateCartListener {
 
-    //定义常量
-    private static final String BASE_URL = "http://10.0.2.2:8080/shops/";
-    private static final String URL_SUFFIX = "/foods";
     private int shopId;
 
     private ShopOrderNavFragment shopOrderNavFragment;
@@ -103,7 +100,7 @@ public class ShopOrderFragment extends Fragment implements ShopOrderFoodFragment
 
     // 请求数据
     private void getHttpData() {
-        String URL = BASE_URL + shopId + URL_SUFFIX;
+        String URL = getString(R.string.base_url_shops) + "/" + shopId + getString(R.string.url_suffix_foods);
 
         OkHttpUtils.getInstance().doGet(URL, new OkHttpUtils.OkHttpCallback() {
             @Override

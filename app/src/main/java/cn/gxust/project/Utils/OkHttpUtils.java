@@ -51,8 +51,13 @@ public class OkHttpUtils {
 
     public void doPost(String url, String jsonRequestBody, OkHttpCallback okHttpCallback) {
         // 构建请求体
-        RequestBody body = RequestBody.create(jsonRequestBody, JSON);
-
+        RequestBody body;
+        if (jsonRequestBody != null) {
+            body = RequestBody.create(jsonRequestBody, JSON);
+        }else{
+            body = RequestBody.create("{}", JSON);
+        }
+        
         // 构建请求
         Request request = new Request.Builder()
                 .url(url)

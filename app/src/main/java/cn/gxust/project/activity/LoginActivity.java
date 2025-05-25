@@ -18,7 +18,6 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
 import org.json.JSONException;
@@ -31,9 +30,6 @@ import cn.gxust.project.R;
 import cn.gxust.project.Utils.OkHttpUtils;
 
 public class LoginActivity extends AppCompatActivity {
-
-    // 常量定义
-    private static final String URL = "http://10.0.2.2:8080/users/login";
 
     // UI控件
     private ImageView loginBtnBack;
@@ -107,15 +103,15 @@ public class LoginActivity extends AppCompatActivity {
             jsonParam.put("phone", userPhone);
             jsonParam.put("password", password);
         } catch (JSONException e) {
-            runOnUiThread(() -> Toast.makeText(LoginActivity.this, "构建请求参数失败", Toast.LENGTH_SHORT).show());
+            Toast.makeText(LoginActivity.this, "构建请求参数失败", Toast.LENGTH_SHORT).show();
             return;
         }
 
         // 使用OkHttpUtils发送网络请求
-        OkHttpUtils.getInstance().doPost(URL, jsonParam.toString(), new OkHttpUtils.OkHttpCallback() {
+        OkHttpUtils.getInstance().doPost(getString(R.string.base_url_users_login), jsonParam.toString(), new OkHttpUtils.OkHttpCallback() {
             @Override
             public void onFailure(IOException e) {
-                runOnUiThread(() -> Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show());
+                Toast.makeText(LoginActivity.this, "登录失败！请稍后重试！", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -143,7 +139,15 @@ public class LoginActivity extends AppCompatActivity {
             // 提取用户信息
             JSONObject dataObject = jsonObject.getJSONObject("data");
             try {
-                user = new Gson().fromJson(dataObject.toString(), UserBean.class);
+                user = new UserBean();
+                user.setId(dataObject.getInt("id"));
+                user.setName(dataObject.getString("name"));
+                user.setGender(dataObject.getString("gender"));
+                user.setBirthday(dataObject.getString("birthday"));
+                user.setPhone(dataObject.getString("phone"));
+                if (!dataObject.isNull("image")) {
+                    user.setImage(dataObject.getString("image"));
+                }
             } catch (JsonSyntaxException e) {
                 Toast.makeText(LoginActivity.this, "数据解析错误", Toast.LENGTH_SHORT).show();
                 return;
@@ -176,13 +180,18 @@ public class LoginActivity extends AppCompatActivity {
     // 记录用户信息
     private void recordUserInfo() {
         if (user != null) {
+            String birthday = "未设置";
+            if (user.getBirthday() != null) {
+                birthday = user.getBirthday();
+            }
             SharedPreferences sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putInt("id", user.getId())
                     .putString("name", user.getName())
                     .putString("gender", user.getGender())
-                    .putString("birthday", user.getBirthday())
+                    .putString("birthday", birthday)
                     .putString("phone", user.getPhone())
+                    .putString("image", user.getImage())
                     .apply();
         }
     }

@@ -7,12 +7,15 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 import cn.gxust.project.bean.FoodBean;
 import cn.gxust.project.R;
 
 public class FoodAdapter extends BaseAdapter {
+
     private List<FoodBean> foodBean;
     private Context context;
     private OnFoodAdapterListener listener;
@@ -72,11 +75,14 @@ public class FoodAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-//        holder.foodImage.setImageResource(foodBean.get(position).getFoodImage());
-        holder.foodName.setText(foodBean.get(position).getName());
-        holder.foodSales.setText("销量: " + String.valueOf(foodBean.get(position).getSales()));
-        holder.foodPrice.setText("价格: " + String.valueOf(foodBean.get(position).getPrice()));
-        holder.foodNum.setText(String.valueOf(foodBean.get(position).getNum()));
+        FoodBean currentFoodBean = foodBean.get(position);
+        holder.foodName.setText(currentFoodBean.getName());
+        holder.foodSales.setText("销量: " + String.valueOf(currentFoodBean.getSales()));
+        holder.foodPrice.setText("价格: " + String.valueOf(currentFoodBean.getPrice()));
+        holder.foodNum.setText(String.valueOf(currentFoodBean.getNum()));
+        if (!currentFoodBean.getImage().equals("null")) {
+            Glide.with(context).load(context.getString(R.string.base_url_images) + "/" + currentFoodBean.getImage()).into(holder.foodImage);
+        }
 
         // 减少按钮点击事件
         holder.foodReduce.setOnClickListener(v -> {

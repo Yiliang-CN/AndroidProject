@@ -7,6 +7,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 import cn.gxust.project.bean.CmtBean;
@@ -54,11 +56,15 @@ public class CmtAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-//        holder.cmtUserImage.setImageResource(cmtBean.get(position).getCmtUserImage());
-        holder.cmtUserName.setText(cmtBean.get(position).getCmtUserName());
-        holder.cmtScore.setText(String.valueOf(cmtBean.get(position).getCmtScore()));
-        holder.cmtTime.setText(cmtBean.get(position).getCmtTime());
-        holder.cmtContent.setText(cmtBean.get(position).getCmtContent());
+        CmtBean currentCmtBean = cmtBean.get(position);
+        holder.cmtUserName.setText(currentCmtBean.getUserName());
+        holder.cmtScore.setText(String.valueOf(currentCmtBean.getScore()));
+        holder.cmtTime.setText(currentCmtBean.getTime());
+        holder.cmtContent.setText(currentCmtBean.getContent());
+        if (!currentCmtBean.getImage().equals("null")) {
+            Glide.with(context).load(context.getString(R.string.base_url_images) + "/" + currentCmtBean.getImage()).into(holder.cmtUserImage);
+        }
+
 
         return convertView;
     }

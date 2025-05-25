@@ -1,11 +1,14 @@
 package cn.gxust.project.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -51,18 +54,21 @@ public class ShopAdapter extends BaseAdapter {
 
             holder.shopImage = convertView.findViewById(R.id.shopImage);
             holder.shopName = convertView.findViewById(R.id.shopName);
+            holder.shopScore = convertView.findViewById(R.id.shopScore);
             holder.shopSales = convertView.findViewById(R.id.shopSales);
-            holder.shopPrice = convertView.findViewById(R.id.shopPrice);
 
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-//        holder.shopImage.setImageResource(shopBean.get(position).getShopImg());
-        holder.shopName.setText(shopBeans.get(position).getName());
-        holder.shopSales.setText("销量: " + String.valueOf(shopBeans.get(position).getSales()));
-        holder.shopPrice.setText("价格: " + String.valueOf(shopBeans.get(position).getPrice()));
+        ShopBean currentShop = shopBeans.get(position);
+        holder.shopName.setText(currentShop.getName());
+        holder.shopScore.setText("评分: " + String.valueOf(currentShop.getScore()));
+        holder.shopSales.setText("销量: " + String.valueOf(currentShop.getSales()));
+        if (!currentShop.getImage().equals("null")) {
+            Glide.with(context).load(context.getString(R.string.base_url_images) + "/" + currentShop.getImage()).into(holder.shopImage);
+        }
 
         return convertView;
     }
@@ -70,8 +76,8 @@ public class ShopAdapter extends BaseAdapter {
     class ViewHolder {
         ImageView shopImage;    // 商店图片
         TextView shopName;      // 商店名称
+        TextView shopScore;     // 商店评分
         TextView shopSales;     // 商店销量
-        TextView shopPrice;     // 商店价格
     }
 
 }

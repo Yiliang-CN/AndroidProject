@@ -8,12 +8,13 @@
 
     <ImageView
         android:id="@+id/userInfoImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
         android:layout_marginTop="64dp"
         android:layout_marginBottom="32dp"
+        android:adjustViewBounds="true"
         android:src="@drawable/user" />
-
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -51,7 +52,7 @@
             android:text="用户名"
             android:textSize="24sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/userInfoUserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,12 +60,14 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_toEndOf="@+id/userInfoUserIdText"
+            android:background="@null"
             android:gravity="center_vertical"
+            android:maxLength="16"
             android:text="用户名"
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/userInfoUserSexText"
+            android:id="@+id/userInfoUserGenderText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/userInfoUserNameText"
@@ -74,15 +77,17 @@
             android:text="性别"
             android:textSize="24sp" />
 
-        <TextView
-            android:id="@+id/userInfoUserSex"
+        <EditText
+            android:id="@+id/userInfoUserGender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/userInfoUserNameText"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_toEndOf="@+id/userInfoUserIdText"
+            android:background="@null"
             android:gravity="center_vertical"
+            android:maxLength="2"
             android:text="性别"
             android:textSize="24sp" />
 
@@ -90,21 +95,22 @@
             android:id="@+id/userInfoUserBirthdayText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/userInfoUserSexText"
+            android:layout_below="@+id/userInfoUserGenderText"
             android:layout_marginStart="48dp"
             android:layout_marginTop="16dp"
             android:gravity="center_vertical"
             android:text="生日"
             android:textSize="24sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/userInfoUserBirthday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/userInfoUserSexText"
+            android:layout_below="@+id/userInfoUserGenderText"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_toEndOf="@+id/userInfoUserIdText"
+            android:background="@null"
             android:gravity="center_vertical"
             android:text="生日"
             android:textSize="24sp" />
@@ -135,6 +141,7 @@
     </RelativeLayout>
 
     <Button
+        android:id="@+id/userInfoSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"

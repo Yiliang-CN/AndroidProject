@@ -49,10 +49,12 @@
     <TextView
         android:id="@+id/cmtContent"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/cmtScore"
         android:layout_marginEnd="16dp"
         android:layout_toEndOf="@+id/cmtUserImage"
+        android:maxLines="6"
+        android:minLines="3"
         android:text="内容"
         android:textSize="16sp" />
 

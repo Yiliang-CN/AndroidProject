@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
@@ -32,8 +31,6 @@ import cn.gxust.project.Utils.ValidationUtils;
 import cn.gxust.project.R;
 
 public class PayActivity extends AppCompatActivity {
-
-    private static final String URL = "http://10.0.2.2:8080/orders";
 
     private TextView payOrderShopName, payOrderUserName, payOrderContent, payOrderPrice, payOrderTime, payOrderState;
     private EditText payOrderAddr, payOrderPhone;
@@ -97,7 +94,7 @@ public class PayActivity extends AppCompatActivity {
             return;
         }
 
-        OkHttpUtils.getInstance().doPost(URL, jsonParam.toString(), new OkHttpUtils.OkHttpCallback() {
+        OkHttpUtils.getInstance().doPost(getString(R.string.base_url_orders), jsonParam.toString(), new OkHttpUtils.OkHttpCallback() {
             @Override
             public void onFailure(IOException e) {
                 runOnUiThread(() -> Toast.makeText(PayActivity.this, "网络请求失败", Toast.LENGTH_SHORT).show());
@@ -119,15 +116,15 @@ public class PayActivity extends AppCompatActivity {
         try {
             JSONObject jsonObject = new JSONObject(jsonData);
             if (jsonObject.getInt("code") != 200) {
-                DialogUtils.showDialog("支付失败", "支付失败，请稍后重试", "确认", this, this::finish);
+                DialogUtils.showConfirmDialog("支付失败", "支付失败，请稍后重试", "确认", this, this::finish);
             }
 
             // 支付成功弹窗提示
-            DialogUtils.showDialog("支付成功", "您的订单已支付成功，点击确认继续", "确认", this, this::finish);
+            DialogUtils.showConfirmDialog("支付成功", "您的订单已支付成功，点击确认继续", "确认", this, this::finish);
 
         } catch (JSONException e) {
             // 支付失败弹窗提示
-            DialogUtils.showDialog("支付失败", "支付失败，请稍后重试", "确认", this, this::finish);
+            DialogUtils.showConfirmDialog("支付失败", "支付失败，请稍后重试", "确认", this, this::finish);
         }
     }
 

@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +26,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.gxust.project.Utils.DialogUtils;
 import cn.gxust.project.Utils.OkHttpUtils;
 import cn.gxust.project.activity.OrderActivity;
 import cn.gxust.project.adapter.OrderAdapter;
@@ -35,8 +35,6 @@ import cn.gxust.project.R;
 
 public class OrderFragment extends Fragment implements OrderAdapter.OnOrderAdapterListener {
 
-    private static final String BASE_URL = "http://10.0.2.2:8080/users/";
-    private static final String URL_SUFFIX = "/orders";
     private int userId;
 
     private ListView orderListView;
@@ -49,6 +47,9 @@ public class OrderFragment extends Fragment implements OrderAdapter.OnOrderAdapt
             if (msg.what == 100) {
                 // 处理网络响应
                 handleResponse((String) msg.obj);
+            } else if (msg.what == 200) {
+                // 处理按钮请求响应
+                handleBtnResponse((String) msg.obj);
             }
         }
     };
@@ -94,8 +95,9 @@ public class OrderFragment extends Fragment implements OrderAdapter.OnOrderAdapt
     }
 
     private void getHttpData() {
-        Log.d("OrderFragment", "getHttpData: " + BASE_URL + userId + URL_SUFFIX);
-        OkHttpUtils.getInstance().doGet(BASE_URL + userId + URL_SUFFIX, new OkHttpUtils.OkHttpCallback() {
+
+        String URL = getString(R.string.base_url_users) + "/" + userId + getString(R.string.url_suffix_orders);
+        OkHttpUtils.getInstance().doGet(URL, new OkHttpUtils.OkHttpCallback() {
             @Override
             public void onFailure(IOException e) {
                 Toast.makeText(getActivity(), "网络请求失败", Toast.LENGTH_SHORT).show();
@@ -105,6 +107,23 @@ public class OrderFragment extends Fragment implements OrderAdapter.OnOrderAdapt
             public void onResponse(String body) {
                 Message message = new Message();
                 message.what = 100;
+                message.obj = body;
+                handler.sendMessage(message);
+            }
+        });
+    }
+
+    private void postHttpData(String URL) {
+        OkHttpUtils.getInstance().doPost(URL, null, new OkHttpUtils.OkHttpCallback() {
+            @Override
+            public void onFailure(IOException e) {
+                Toast.makeText(getActivity(), "网络请求失败", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onResponse(String body) {
+                Message message = new Message();
+                message.what = 200;
                 message.obj = body;
                 handler.sendMessage(message);
             }
@@ -147,6 +166,24 @@ public class OrderFragment extends Fragment implements OrderAdapter.OnOrderAdapt
         }
     }
 
+    private void handleBtnResponse(String jsonData) {
+        try {
+            JSONObject jsonObject = new JSONObject(jsonData);
+            int code = jsonObject.getInt("code");
+            if (code != 200) {
+                String errorMsg = jsonObject.getString("message");
+                Toast.makeText(requireContext(), "请求失败! code: " + code + "message: " + errorMsg, Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            orderAdapter.notifyDataSetChanged();
+            DialogUtils.showConfirmDialog("提示", "订单处理成功!", "确定", requireContext(), null);
+
+        } catch (JSONException e) {
+            Toast.makeText(requireContext(), "数据解析失败", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     // 订单项中点击店名即可打开订单详情页
     // 为什么要这样弄 因为订单项的布局中包含有 按钮 按钮会覆盖掉 项 本身的点击事件 所以只能单独选择店名的作为详细页面的入口
@@ -156,6 +193,22 @@ public class OrderFragment extends Fragment implements OrderAdapter.OnOrderAdapt
         intent.putExtra("orderBean", orderBean);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT); // 设置启动标志，使得Activity在栈顶
         startActivity(intent);
+    }
+
+    @Override
+    public void setOrderCancelBtnOnClickListener(OrderBean orderBean) {
+        DialogUtils.showConfirmDialogWithCancel("提示", "确定取消订单吗？", "取消", "确定", getContext(), null, () -> {
+            String URL = getString(R.string.base_url_orders_cancel) + "/" + orderBean.getId();
+            postHttpData(URL);
+        });
+    }
+
+    @Override
+    public void setOrderDeleteBtnOnClickListener(OrderBean orderBean) {
+        DialogUtils.showConfirmDialogWithCancel("提示", "确定删除订单吗？", "取消", "确定", getContext(), null, () -> {
+            String URL = getString(R.string.base_url_orders_delete) + "/" + orderBean.getId();
+            postHttpData(URL);
+        });
     }
 
     private boolean isUserLoggedIn() {

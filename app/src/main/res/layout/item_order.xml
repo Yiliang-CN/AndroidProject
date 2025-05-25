@@ -11,13 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_toStartOf="@+id/orderID"
+        android:layout_toStartOf="@+id/orderId"
         android:gravity="center_vertical"
         android:text="商店名称"
         android:textSize="32sp" />
 
     <TextView
-        android:id="@+id/orderID"
+        android:id="@+id/orderId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
