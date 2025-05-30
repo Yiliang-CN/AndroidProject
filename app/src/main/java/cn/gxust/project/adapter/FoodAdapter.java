@@ -81,7 +81,7 @@ public class FoodAdapter extends BaseAdapter {
         holder.foodPrice.setText("价格: " + String.valueOf(currentFoodBean.getPrice()));
         holder.foodNum.setText(String.valueOf(currentFoodBean.getNum()));
         if (!currentFoodBean.getImage().equals("null")) {
-            Glide.with(context).load(context.getString(R.string.base_url_images) + "/" + currentFoodBean.getImage()).into(holder.foodImage);
+            Glide.with(context).load(context.getString(R.string.base_url_images) +  currentFoodBean.getImage()).into(holder.foodImage);
         }
 
         // 减少按钮点击事件

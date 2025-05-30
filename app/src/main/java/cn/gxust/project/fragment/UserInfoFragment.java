@@ -188,7 +188,7 @@ public class UserInfoFragment extends Fragment {
         userInfoUserBirthday.setText(userBirthday);
         userInfoUserPhone.setText(String.valueOf(userPhone));
         if (!userImage.equals("null")) {
-            Glide.with(requireContext()).load(getString(R.string.base_url_images) + "/" + userImage).into(userInfoImage);
+            Glide.with(requireContext()).load(getString(R.string.base_url_images) + userImage).into(userInfoImage);
         }
     }
 

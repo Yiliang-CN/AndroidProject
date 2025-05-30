@@ -62,7 +62,7 @@ public class CmtAdapter extends BaseAdapter {
         holder.cmtTime.setText(currentCmtBean.getTime());
         holder.cmtContent.setText(currentCmtBean.getContent());
         if (!currentCmtBean.getImage().equals("null")) {
-            Glide.with(context).load(context.getString(R.string.base_url_images) + "/" + currentCmtBean.getImage()).into(holder.cmtUserImage);
+            Glide.with(context).load(context.getString(R.string.base_url_images) +  currentCmtBean.getImage()).into(holder.cmtUserImage);
         }
 
 

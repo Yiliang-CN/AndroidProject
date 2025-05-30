@@ -67,7 +67,7 @@ public class ShopAdapter extends BaseAdapter {
         holder.shopScore.setText("评分: " + String.valueOf(currentShop.getScore()));
         holder.shopSales.setText("销量: " + String.valueOf(currentShop.getSales()));
         if (!currentShop.getImage().equals("null")) {
-            Glide.with(context).load(context.getString(R.string.base_url_images) + "/" + currentShop.getImage()).into(holder.shopImage);
+            Glide.with(context).load(context.getString(R.string.base_url_images) + currentShop.getImage()).into(holder.shopImage);
         }
 
         return convertView;
