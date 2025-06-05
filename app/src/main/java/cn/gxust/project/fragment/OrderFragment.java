@@ -150,6 +150,7 @@ public class OrderFragment extends Fragment implements OrderAdapter.OnOrderAdapt
                 JSONObject orderObject = dataArray.getJSONObject(i);
                 OrderBean orderBean = new OrderBean();
                 orderBean.setId(orderObject.getLong("id"));
+                orderBean.setShopId(orderObject.getInt("shopId"));
                 orderBean.setShopName(orderObject.getString("shopName"));
                 orderBean.setUserName(orderObject.getString("userName"));
                 orderBean.setContent(orderObject.getString("content"));
@@ -191,6 +192,7 @@ public class OrderFragment extends Fragment implements OrderAdapter.OnOrderAdapt
     public void setOrderShopNameOnClickListener(OrderBean orderBean) {
         Intent intent = new Intent(getContext(), OrderActivity.class);
         intent.putExtra("orderBean", orderBean);
+        System.out.println("orderBean shopId: "+ orderBean.getShopId());
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT); // 设置启动标志，使得Activity在栈顶
         startActivity(intent);
     }

@@ -129,9 +129,6 @@ public class OrderActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
         orderBean.setUserId(sharedPreferences.getInt("id", 1));
 
-        sharedPreferences = getSharedPreferences("shopInfo", MODE_PRIVATE);
-        orderBean.setShopId(sharedPreferences.getInt("id", 1));
-
         if (!ValidationUtils.isValidScore(orderScore.getText().toString())) {
             Toast.makeText(this, "评分为1-5分", Toast.LENGTH_SHORT).show();
             return false;
