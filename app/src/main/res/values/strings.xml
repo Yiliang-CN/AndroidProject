@@ -4,19 +4,34 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- 本机服务器网络地址 -->
-    <string name="base_url">http://10.0.2.2:8080/</string>
+<!--    <string name="base_url">http://10.0.2.2:8080/</string>-->
 
-    <string name="base_url_users">http://10.0.2.2:8080/users</string>
-    <string name="base_url_shops">http://10.0.2.2:8080/shops</string>
-    <string name="base_url_foods">http://10.0.2.2:8080/foods</string>
-    <string name="base_url_orders">http://10.0.2.2:8080/orders</string>
-    <string name="base_url_comments">http://10.0.2.2:8080/comments</string>
-    <string name="base_url_images">http://10.0.2.2:8080/images</string>
+<!--    <string name="base_url_users">http://10.0.2.2:8080/users</string>-->
+<!--    <string name="base_url_shops">http://10.0.2.2:8080/shops</string>-->
+<!--    <string name="base_url_foods">http://10.0.2.2:8080/foods</string>-->
+<!--    <string name="base_url_orders">http://10.0.2.2:8080/orders</string>-->
+<!--    <string name="base_url_comments">http://10.0.2.2:8080/comments</string>-->
+<!--    <string name="base_url_images">http://10.0.2.2:8080/images</string>-->
 
-    <string name="base_url_users_login">http://10.0.2.2:8080/users/login</string>
-    <string name="base_url_users_register">http://10.0.2.2:8080/users/register</string>
-    <string name="base_url_orders_cancel">http://10.0.2.2:8080/orders/cancel</string>
-    <string name="base_url_orders_delete">http://10.0.2.2:8080/orders/delete</string>
+<!--    <string name="base_url_users_login">http://10.0.2.2:8080/users/login</string>-->
+<!--    <string name="base_url_users_register">http://10.0.2.2:8080/users/register</string>-->
+<!--    <string name="base_url_orders_cancel">http://10.0.2.2:8080/orders/cancel</string>-->
+<!--    <string name="base_url_orders_delete">http://10.0.2.2:8080/orders/delete</string>-->
+
+    <!-- 阿里云服务器网络地址 -->
+    <string name="base_url">http://8.134.195.239:8080/</string>
+
+    <string name="base_url_users">http://8.134.195.239:8080/users</string>
+    <string name="base_url_shops">http://8.134.195.239:8080/shops</string>
+    <string name="base_url_foods">http://8.134.195.239:8080/foods</string>
+    <string name="base_url_orders">http://8.134.195.239:8080/orders</string>
+    <string name="base_url_comments">http://8.134.195.239:8080/comments</string>
+    <string name="base_url_images">http://8.134.195.239:8080/images</string>
+
+    <string name="base_url_users_login">http://8.134.195.239:8080/users/login</string>
+    <string name="base_url_users_register">http://8.134.195.239:8080/users/register</string>
+    <string name="base_url_orders_cancel">http://8.134.195.239:8080/orders/cancel</string>
+    <string name="base_url_orders_delete">http://8.134.195.239:8080/orders/delete</string>
 
     <string name="url_suffix_foods">/foods</string>
     <string name="url_suffix_orders">/orders</string>
